@@ -3,6 +3,7 @@ using System.Collections;
 
 // Required component
 [RequireComponent(typeof(Camera))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class CameraController : MonoBehaviour
 {
 
@@ -97,5 +98,14 @@ public class CameraController : MonoBehaviour
         locking = true;
         currentLockTime = _lockTime;
     }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.tag == "Action")
+        {
+            // Gestion audimate
+        }
+    }
+
     #endregion
 }
