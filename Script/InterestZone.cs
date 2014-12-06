@@ -33,7 +33,7 @@ public class InterestZone : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animation animation;
 
-    public float timeToPlay = 2f;
+    public float timeActive = 2f;
     private float currentTime;
 
     public ActionTag [] tags;
@@ -67,7 +67,7 @@ public class InterestZone : MonoBehaviour
     /// </summary>
     public void ActiveZone()
     {
-        currentTime = timeToPlay;
+        currentTime = timeActive;
         animation.Play();
     }
 

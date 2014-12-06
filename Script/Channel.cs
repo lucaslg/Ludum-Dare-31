@@ -14,7 +14,8 @@ public class Channel : MonoBehaviour
 {
     public float CurrentAudimat = 0;
     public float AudimatAtStart = 50;
-    public NewsTicker NewsTicker;
+    public GameObject NewsTicker;
+    public GameObject audimatBar;
 
     public ActionTag[] PositiveTags;
     public ActionTag[] NegativeTags;
@@ -40,7 +41,8 @@ public class Channel : MonoBehaviour
             if (AudimatState != EAudimatState.Low)
             {
                 AudimatState = EAudimatState.Low;
-                NewsTicker.ChangeAudimat(EAudimatState.Low);
+                NewsTicker.GetComponent<NewsTicker>().ChangeAudimat(EAudimatState.Low);
+
             }
         }
         else if (CurrentAudimat > GameMode.AudimatMedium && CurrentAudimat < GameMode.AudimatHigh)
@@ -48,7 +50,7 @@ public class Channel : MonoBehaviour
             if (AudimatState != EAudimatState.Medium)
             {
                 AudimatState = EAudimatState.Medium;
-                NewsTicker.ChangeAudimat(EAudimatState.Medium);
+                NewsTicker.GetComponent<NewsTicker>().ChangeAudimat(EAudimatState.Medium);
             }
         }
         else if (CurrentAudimat > GameMode.AudimatHigh)
@@ -56,7 +58,7 @@ public class Channel : MonoBehaviour
             if (AudimatState != EAudimatState.High)
             {
                 AudimatState = EAudimatState.High;
-                NewsTicker.ChangeAudimat(EAudimatState.High);
+                NewsTicker.GetComponent<NewsTicker>().ChangeAudimat(EAudimatState.High);
             }
         }
     }
