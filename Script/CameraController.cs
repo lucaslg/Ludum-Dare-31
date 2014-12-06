@@ -15,7 +15,8 @@ public class CameraController : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+    {
         currentZoom = transform.position.z;
         // Zoom Management 
         minimumZoom += currentZoom;
@@ -23,7 +24,8 @@ public class CameraController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
         float AxisX = Input.GetAxis("Horizontal");
         float AxisY = Input.GetAxis("Vertical");
 
