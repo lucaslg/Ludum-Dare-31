@@ -1,6 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum ActionTag
+{
+    // Define the tags
+    /* misère, violence policière, délinquance, peace, chaos, ordre */
+    ORDER,
+    POLICE_VIOLENCE,
+    PEACE,
+    CHAOS,
+    CRIME,
+    MISERY
+}
+
 // Required component
 [RequireComponent(typeof(Animation))]
 [RequireComponent(typeof(SpriteRenderer))]
@@ -23,6 +35,8 @@ public class InterestZone : MonoBehaviour
 
     public float timeToPlay = 2f;
     private float currentTime;
+
+    public ActionTag [] tags;
 
     #endregion
 
@@ -55,5 +69,14 @@ public class InterestZone : MonoBehaviour
     {
         currentTime = timeToPlay;
         animation.Play();
+    }
+
+    /// <summary>
+    /// Return the tags of the InterstZone
+    /// </summary>
+    /// <returns>(ActionTag[])</returns>
+    public ActionTag[] GetTags()
+    {
+        return tags;
     }
 }
