@@ -13,7 +13,7 @@ public class NewsTicker : MonoBehaviour
 
     private bool _initialized = false;
 
-    public float ScrollingSpeed;
+    public static float ScrollingSpeed = 2;
     public string[] LowAudimatMessages;
     public string[] MediumAudimatMessages;
     public string[] HighAudimatMessages;
@@ -39,35 +39,36 @@ public class NewsTicker : MonoBehaviour
 	// Update is called once per frame
     protected void Update()
     {
-        if (!_initialized)
+        if (!string.IsNullOrEmpty(_textComponent.text))
         {
-            GUIStyle guiStyle = new GUIStyle
+            if (!_initialized)
             {
-                font = _textComponent.font, 
-                fontSize = _textComponent.fontSize    
-            };
-            _textComponentSize = guiStyle.CalcSize(new GUIContent(_textComponent.text));
+                GUIStyle guiStyle = new GUIStyle
+                {
+                    font = _textComponent.font,
+                    fontSize = _textComponent.fontSize
+                };
+                _textComponentSize = guiStyle.CalcSize(new GUIContent(_textComponent.text));
 
-            if (_textComponentSize.x < Screen.width)
-            {
-                _startingPosition = new Vector3(Screen.width, 0, 0);
+
+                _startingPosition = new Vector3(Screen.width / 2.0f + _textComponentSize.x / 2.0f, 0.0f, 0.0f);
+
+                Debug.Log(_startingPosition);
+                _textComponent.rectTransform.localPosition = _startingPosition;
+
+                _initialized = true;
             }
             else
             {
-                _startingPosition = new Vector3(_textComponentSize.x, 0, 0);
+                if (_textComponent.rectTransform.localPosition.x > -_startingPosition.x)
+                {
+                    _textComponent.rectTransform.localPosition = new Vector3(_textComponent.rectTransform.localPosition.x - ScrollingSpeed / 100.0f / Time.deltaTime, 0);
+                }
+                else
+                {
+                    _textComponent.rectTransform.localPosition = _startingPosition;
+                }
             }
-            _textComponent.rectTransform.localPosition = _startingPosition;
-            
-            _initialized = true;
-        }
-
-        if (_textComponent.rectTransform.localPosition.x > - _startingPosition.x)
-        {
-            _textComponent.rectTransform.localPosition = new Vector3(_textComponent.rectTransform.localPosition.x - ScrollingSpeed / 100 / Time.deltaTime, 0);
-        }
-        else
-        {
-            _textComponent.rectTransform.localPosition = _startingPosition;
         }
 	}
 
