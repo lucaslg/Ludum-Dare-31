@@ -18,7 +18,10 @@ public class CameraController : MonoBehaviour
     public float speedZoom = 1f;
     private float currentZoom;
 
-    // Limit of the camera
+    // Locking system
+    public float lockTime;
+    private bool locking;   // Is the camera locked
+    private float currentLockTime;  // Current locktime
 
     // Keymap
     public KeyCode zoomKey = KeyCode.PageUp, unzoomKey = KeyCode.PageDown;
@@ -32,19 +35,34 @@ public class CameraController : MonoBehaviour
         // Zoom Management 
         minimumZoom += currentZoom;
         maximumZoom += currentZoom;
+
+        // Locking system
+        locking = false;
+        currentLockTime = 0f;
+
+        Lock(2f);
 	}
 	
 	// Update is called once per frame
-	void Update () 
+    void Update()
     {
-        float AxisX = Input.GetAxis("Horizontal");
-        float AxisY = Input.GetAxis("Vertical");
+        if (!locking)
+        {
+            float AxisX = Input.GetAxis("Horizontal");
+            float AxisY = Input.GetAxis("Vertical");
 
-        ZoomManager();
+            ZoomManager();
 
-        // Update the position
-        transform.position = new Vector3(transform.position.x + AxisX * horizontalSpeed * Time.deltaTime, transform.position.y + AxisY * verticalSpeed * Time.deltaTime, currentZoom);
-	}
+            // Update the position
+            transform.position = new Vector3(transform.position.x + AxisX * horizontalSpeed * Time.deltaTime, transform.position.y + AxisY * verticalSpeed * Time.deltaTime, currentZoom);
+        }
+        else
+        {
+            currentLockTime -= Time.deltaTime;
+            if (currentLockTime < 0f)
+                locking = false;
+        }
+    }
 
     #region Camera Functions
 
@@ -68,6 +86,16 @@ public class CameraController : MonoBehaviour
             if (currentZoom < minimumZoom)
                 currentZoom = minimumZoom;
         }
+    }
+
+    /// <summary>
+    /// Lock the camera during some times
+    /// </summary>
+    /// <param name="_lockTime">(float) : time that the camera is locked</param>
+    void Lock(float _lockTime)
+    {
+        locking = true;
+        currentLockTime = _lockTime;
     }
     #endregion
 }
