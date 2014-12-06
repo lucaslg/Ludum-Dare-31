@@ -27,6 +27,9 @@ public class CameraController : MonoBehaviour
     // Keymap
     public KeyCode zoomKey = KeyCode.PageUp, unzoomKey = KeyCode.PageDown;
 
+    public Vector2 direction;
+    public Vector2 lockedPosition;
+
     #endregion
 
     // Use this for initialization
@@ -57,6 +60,9 @@ public class CameraController : MonoBehaviour
         }
         else
         {
+            // Go to the InterestZone
+            GoToLockedPosition();
+
             currentLockTime -= Time.deltaTime;
             if (currentLockTime < 0f)
                 locking = false;
@@ -71,7 +77,8 @@ public class CameraController : MonoBehaviour
             InterestZone zone = collider.GetComponent<InterestZone>();
             zone.ActiveZone();  // Active the zone
 
-            
+            // Lock the camera on the action
+            Lock(5f, zone);
             //GameState.CurrentChannel.AddActionToChannel(zone);
         }
     }
@@ -101,14 +108,32 @@ public class CameraController : MonoBehaviour
     }
 
     /// <summary>
-    /// Lock the camera on an action
+    /// Lock the camera on an action for _lockTime seconds
     /// </summary>
     /// <param name="_lockTime">(float) Time locked camera</param>
     /// <param name="zone">(IntersetZone) Zone to focus</param>
     void Lock(float _lockTime, InterestZone zone)
     {
-        locking = true;
-        currentLockTime = _lockTime;
+        if (!locking)
+        {
+            locking = true;
+            currentLockTime = _lockTime;
+            lockedPosition = new Vector2(zone.transform.position.x, zone.transform.position.y);
+        }
+    }
+
+    /// <summary>
+    /// Go to the locked position
+    /// </summary>
+    void GoToLockedPosition()
+    {
+        // Go to the point
+        Vector3 localDirection = ((Vector3)lockedPosition - this.transform.position);
+
+        // Remember to use the move script
+        direction = Vector3.Normalize(localDirection);
+
+        transform.Translate(new Vector2(direction.x * horizontalSpeed * Time.deltaTime, direction.y * verticalSpeed * Time.deltaTime));
     }
 
     #endregion
