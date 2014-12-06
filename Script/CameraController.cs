@@ -24,8 +24,6 @@ public class CameraController : MonoBehaviour
     private bool locking;   // Is the camera locked
     private float currentLockTime;  // Current locktime
 
-    private Vector2 focusPosition;
-
     // Keymap
     public KeyCode zoomKey = KeyCode.PageUp, unzoomKey = KeyCode.PageDown;
 
@@ -111,7 +109,6 @@ public class CameraController : MonoBehaviour
     {
         locking = true;
         currentLockTime = _lockTime;
-        focusPosition = new Vector2( zone.transform.position.x, zone.transform.position.y);
     }
 
     #endregion

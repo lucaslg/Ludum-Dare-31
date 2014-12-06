@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 
+public enum EChannel
+{
+    All = 0,
+    FoxNews = 1,
+    AlJazeera = 2,
+    BokoHaram = 3,
+    AnarchyTV = 4
+}
+
 public enum EAudimatState
 {
     Low = 0,
@@ -20,9 +29,6 @@ public class Channel : MonoBehaviour
     public ActionTag[] PositiveTags;
     public ActionTag[] NegativeTags;
 
-    private List<int> _positiveAudimatObjects;
-    private List<int> _negativeAudimatObjects;
-
     [HideInInspector]
     public EAudimatState AudimatState;
 
@@ -30,8 +36,6 @@ public class Channel : MonoBehaviour
     {
         CurrentAudimat = AudimatAtStart;
         AudimatState = EAudimatState.Low;
-        _positiveAudimatObjects = new List<int>();
-        _negativeAudimatObjects = new List<int>();
     }
 
     protected void Update()
@@ -63,7 +67,7 @@ public class Channel : MonoBehaviour
         }
     }
 
-    public void AddActionToChannel(InterestZone obj)
+    public virtual void AddActionToChannel(InterestZone obj)
     {
         int positiveMatch = 0;
         int negativeMatch = 0;

@@ -5,12 +5,12 @@ public enum ActionTag
 {
     // Define the tags
     /* misère, violence policière, délinquance, peace, chaos, ordre */
-    ORDER,
-    POLICE_VIOLENCE,
-    PEACE,
-    CHAOS,
-    CRIME,
-    MISERY
+    ORDER = 0,
+    POLICE_VIOLENCE = 1,
+    PEACE = 2,
+    CHAOS = 3,
+    CRIME = 4,
+    MISERY = 5
 }
 
 // Required component
@@ -30,13 +30,13 @@ public class InterestZone : MonoBehaviour
         }
     }
 
-    private SpriteRenderer spriteRenderer;
     private Animation animation;
 
     public float timeActive = 2f;
     private float currentTime;
 
-    public ActionTag [] tags;
+    public EChannel ChannelTarget;
+    public ActionTag[] tags;
 
     #endregion
 
@@ -47,7 +47,6 @@ public class InterestZone : MonoBehaviour
 
         // Initialisation
         animation = GetComponent<Animation>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame

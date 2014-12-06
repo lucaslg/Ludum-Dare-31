@@ -22,4 +22,12 @@ public class FoxNews : Channel
         }
     }
     #endregion
+
+    public override void AddActionToChannel(InterestZone obj)
+    {
+        if (obj.ChannelTarget == EChannel.All || obj.ChannelTarget == EChannel.FoxNews)
+        {
+            base.AddActionToChannel(obj);
+        }
+    }
 }
