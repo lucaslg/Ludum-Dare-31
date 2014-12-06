@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 
@@ -15,6 +16,12 @@ public class Channel : MonoBehaviour
     public float AudimatAtStart = 50;
     public NewsTicker NewsTicker;
 
+    public ActionTag[] PositiveTags;
+    public ActionTag[] NegativeTags;
+
+    private List<int> _positiveAudimatObjects;
+    private List<int> _negativeAudimatObjects;
+
     [HideInInspector]
     public EAudimatState AudimatState;
 
@@ -22,6 +29,8 @@ public class Channel : MonoBehaviour
     {
         CurrentAudimat = AudimatAtStart;
         AudimatState = EAudimatState.Low;
+        _positiveAudimatObjects = new List<int>();
+        _negativeAudimatObjects = new List<int>();
     }
 
     protected void Update()
@@ -50,6 +59,35 @@ public class Channel : MonoBehaviour
                 NewsTicker.ChangeAudimat(EAudimatState.High);
             }
         }
+    }
 
+    public void AddActionToChannel(InterestZone obj)
+    {
+        int positiveMatch = 0;
+        int negativeMatch = 0;
+
+        foreach (ActionTag actionTag in obj.tags)
+        {
+            int i = 0;
+            while (i < obj.tags.Length)
+            {
+                if (PositiveTags[i] == actionTag)
+                {
+                    positiveMatch++;
+                }
+                if (NegativeTags[i] == actionTag)
+                {
+                    negativeMatch++;
+                }
+                i++;
+            }
+        }
+
+        IncreaseAudimat(positiveMatch - negativeMatch);
+    }
+
+    private void IncreaseAudimat(int match)
+    {
+        CurrentAudimat += match;
     }
 }

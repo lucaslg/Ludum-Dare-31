@@ -23,5 +23,15 @@ public class GameState : MonoBehaviour
     }
     #endregion
 
-    public static GameObject FoxNews;
+    public static Channel CurrentChannel;
+
+    void Start()
+    {
+        
+    }
+
+    public static void ChangeChannel(Channel chan)
+    {
+        CurrentChannel = chan;
+    }
 }
