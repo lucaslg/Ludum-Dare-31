@@ -20,6 +20,9 @@ public class CameraController : MonoBehaviour
 
     // Limit of the camera
 
+    // Keymap
+    public KeyCode zoomKey = KeyCode.PageUp, unzoomKey = KeyCode.PageDown;
+
     #endregion
 
     // Use this for initialization
@@ -44,17 +47,21 @@ public class CameraController : MonoBehaviour
 	}
 
     #region Camera Functions
+
+    /// <summary>
+    /// Camera zoom manager
+    /// </summary>
     void ZoomManager()
     {
         // Zoom management
-        if (Input.GetKey(KeyCode.PageUp))   // Zoom
+        if (Input.GetKey(zoomKey))   // Zoom
         {
             currentZoom += speedZoom * Time.deltaTime;
 
             if (currentZoom > maximumZoom)
                 currentZoom = maximumZoom;
         }
-        else if (Input.GetKey(KeyCode.PageDown))    // Unzoom
+        else if (Input.GetKey(unzoomKey))    // Unzoom
         {
             currentZoom -= speedZoom * Time.deltaTime;
 
