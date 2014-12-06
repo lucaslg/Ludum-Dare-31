@@ -13,6 +13,7 @@ public class NewsTicker : MonoBehaviour
 
     private bool _initialized = false;
 
+    public string Separator;
     public static float ScrollingSpeed = 2;
     public string[] LowAudimatMessages;
     public string[] MediumAudimatMessages;
@@ -105,7 +106,7 @@ public class NewsTicker : MonoBehaviour
         int i = 0;
         while (i < messages.Length)
         {
-            _textComponent.text = string.Format("{0} - FOX NEWS - {1}", _textComponent.text, messages[i].ToUpper());
+            _textComponent.text = string.Format("{0} {1} {2}", _textComponent.text, Separator, messages[i].ToUpper());
             i++;
         }
     }
