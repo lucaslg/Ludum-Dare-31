@@ -11,7 +11,7 @@ public class NewsTicker : MonoBehaviour
     private Vector3 _startingPosition;
     private string[] _currentAudimatMessages;
 
-    private bool initialized = false;
+    private bool _initialized = false;
 
     public float ScrollingSpeed;
     public string[] LowAudimatMessages;
@@ -39,7 +39,7 @@ public class NewsTicker : MonoBehaviour
 	// Update is called once per frame
     protected void Update()
     {
-        if (!initialized)
+        if (!_initialized)
         {
             GUIStyle guiStyle = new GUIStyle
             {
@@ -47,7 +47,6 @@ public class NewsTicker : MonoBehaviour
                 fontSize = _textComponent.fontSize    
             };
             _textComponentSize = guiStyle.CalcSize(new GUIContent(_textComponent.text));
-            Debug.Log(_textComponentSize);
 
             if (_textComponentSize.x < Screen.width)
             {
@@ -59,7 +58,7 @@ public class NewsTicker : MonoBehaviour
             }
             _textComponent.rectTransform.localPosition = _startingPosition;
             
-            initialized = true;
+            _initialized = true;
         }
 
         if (_textComponent.rectTransform.localPosition.x > - _startingPosition.x)
@@ -87,7 +86,7 @@ public class NewsTicker : MonoBehaviour
                 break;
         }
         ClearTicker();
-        initialized = false;
+        _initialized = false;
         PopulateTextComponent(_currentAudimatMessages);
     }
 
@@ -105,7 +104,7 @@ public class NewsTicker : MonoBehaviour
         int i = 0;
         while (i < messages.Length)
         {
-            _textComponent.text = string.Format("{0} - TOX NEWS - {1}", _textComponent.text, messages[i].ToUpper());
+            _textComponent.text = string.Format("{0} - FOX NEWS - {1}", _textComponent.text, messages[i].ToUpper());
             i++;
         }
     }

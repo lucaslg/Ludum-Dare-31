@@ -28,6 +28,9 @@ public class GameMode : MonoBehaviour
     public const float AudimatLow       = 0;
     public const float AudimatMedium    = 100;
     public const float AudimatHigh      = 300;
-    
+
+    public const float AudimatIncreaseValue = 1.0f;
+    public const float AudimatIncreaseDelay = 0.5f;
+
     #endregion
 }
