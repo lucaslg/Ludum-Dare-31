@@ -65,6 +65,15 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.tag == "Action")
+        {
+            // Gestion audimate
+
+        }
+    }
+
     #region Camera Functions
 
     /// <summary>
@@ -97,14 +106,6 @@ public class CameraController : MonoBehaviour
     {
         locking = true;
         currentLockTime = _lockTime;
-    }
-
-    void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.tag == "Action")
-        {
-            // Gestion audimate
-        }
     }
 
     #endregion
