@@ -3,12 +3,23 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour {
 
+    // Speed
     public float horizontalSpeed = 1f;
     public float verticalSpeed = 1f;
 
+    // Zoom
+    public float minimumZoom = 0f;
+    public float maximumZoom = 2f;
+    public float speedZoom = 1f;
+    private float currentZoom;
+
+
 	// Use this for initialization
 	void Start () {
-	
+        currentZoom = transform.position.z;
+        // Zoom Management 
+        minimumZoom += currentZoom;
+        maximumZoom += currentZoom;
 	}
 	
 	// Update is called once per frame
@@ -16,7 +27,28 @@ public class CameraController : MonoBehaviour {
         float AxisX = Input.GetAxis("Horizontal");
         float AxisY = Input.GetAxis("Vertical");
 
+        ZoomManager();
+
         // Update the position
-        transform.Translate(new Vector3(AxisX * horizontalSpeed * Time.deltaTime, AxisY * verticalSpeed * Time.deltaTime, 0));
+        transform.position = new Vector3(transform.position.x + AxisX * horizontalSpeed * Time.deltaTime, transform.position.y + AxisY * verticalSpeed * Time.deltaTime, currentZoom);
 	}
+
+    void ZoomManager()
+    {
+        // Zoom management
+        if (Input.GetKey(KeyCode.PageUp))   // Zoom
+        {
+            currentZoom += speedZoom * Time.deltaTime;
+
+            if (currentZoom > maximumZoom)
+                currentZoom = maximumZoom;
+        }
+        else if (Input.GetKey(KeyCode.PageDown))    // Unzoom
+        {
+            currentZoom -= speedZoom * Time.deltaTime;
+
+            if (currentZoom < minimumZoom)
+                currentZoom = minimumZoom;
+        }
+    }
 }
