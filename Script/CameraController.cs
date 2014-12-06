@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Required component
 [RequireComponent(typeof(Camera))]
 public class CameraController : MonoBehaviour
 {
 
     #region Attributes
+
     // Speed
     public float horizontalSpeed = 1f;
     public float verticalSpeed = 1f;
@@ -15,7 +17,9 @@ public class CameraController : MonoBehaviour
     public float maximumZoom = 2f;
     public float speedZoom = 1f;
     private float currentZoom;
-    
+
+    // Limit of the camera
+
     #endregion
 
     // Use this for initialization
