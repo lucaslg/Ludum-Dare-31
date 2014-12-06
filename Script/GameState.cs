@@ -23,5 +23,5 @@ public class GameState : MonoBehaviour
     }
     #endregion
 
-    
+    public static GameObject FoxNews;
 }

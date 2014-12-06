@@ -23,5 +23,11 @@ public class GameMode : MonoBehaviour
     }
     #endregion
 
+    #region GAME CONSTS
     
+    public const float AudimatLow       = 0;
+    public const float AudimatMedium    = 100;
+    public const float AudimatHigh      = 300;
+    
+    #endregion
 }

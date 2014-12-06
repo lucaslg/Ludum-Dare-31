@@ -2,13 +2,6 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public enum EAudimatState
-{
-    Low = 0,
-    Medium = 1,
-    High = 2
-}
-
 [RequireComponent(typeof(Text))]
 [RequireComponent(typeof(ContentSizeFitter))]
 public class NewsTicker : MonoBehaviour
@@ -17,7 +10,6 @@ public class NewsTicker : MonoBehaviour
     private Vector2 _textComponentSize;
     private Vector3 _startingPosition;
     private string[] _currentAudimatMessages;
-    private EAudimatState _audimatState;
 
     private bool initialized = false;
 
@@ -49,9 +41,11 @@ public class NewsTicker : MonoBehaviour
     {
         if (!initialized)
         {
-            GUIStyle guiStyle = new GUIStyle();
-            guiStyle.font = _textComponent.font;
-            guiStyle.fontSize = _textComponent.fontSize;
+            GUIStyle guiStyle = new GUIStyle
+            {
+                font = _textComponent.font, 
+                fontSize = _textComponent.fontSize    
+            };
             _textComponentSize = guiStyle.CalcSize(new GUIContent(_textComponent.text));
             Debug.Log(_textComponentSize);
 
@@ -80,8 +74,7 @@ public class NewsTicker : MonoBehaviour
 
     public void ChangeAudimat(EAudimatState state)
     {
-        _audimatState = state;
-        switch (_audimatState)
+        switch (state)
         {
             case EAudimatState.Low:
                 _currentAudimatMessages = LowAudimatMessages;
@@ -97,7 +90,6 @@ public class NewsTicker : MonoBehaviour
         initialized = false;
         PopulateTextComponent(_currentAudimatMessages);
     }
-
 
     private void ClearTicker()
     {
