@@ -1,17 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class NewsCrawler : MonoBehaviour
 {
     public string[] Messages;
 
 	// Use this for initialization
-	void Start () {
+	protected void Start () {
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+    protected void Update()
+    {
+	    
 	}
+
+
 }
