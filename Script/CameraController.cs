@@ -2,8 +2,10 @@
 using System.Collections;
 
 [RequireComponent(typeof(Camera))]
-public class CameraController : MonoBehaviour {
+public class CameraController : MonoBehaviour
+{
 
+    #region Attributes
     // Speed
     public float horizontalSpeed = 1f;
     public float verticalSpeed = 1f;
@@ -13,9 +15,10 @@ public class CameraController : MonoBehaviour {
     public float maximumZoom = 2f;
     public float speedZoom = 1f;
     private float currentZoom;
+    
+    #endregion
 
-
-	// Use this for initialization
+    // Use this for initialization
 	void Start () 
     {
         currentZoom = transform.position.z;
@@ -36,7 +39,7 @@ public class CameraController : MonoBehaviour {
         transform.position = new Vector3(transform.position.x + AxisX * horizontalSpeed * Time.deltaTime, transform.position.y + AxisY * verticalSpeed * Time.deltaTime, currentZoom);
 	}
 
-    #region Functions
+    #region Camera Functions
     void ZoomManager()
     {
         // Zoom management
