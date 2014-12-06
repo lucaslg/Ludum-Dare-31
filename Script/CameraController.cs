@@ -24,6 +24,8 @@ public class CameraController : MonoBehaviour
     private bool locking;   // Is the camera locked
     private float currentLockTime;  // Current locktime
 
+    private Vector2 focusPosition;
+
     // Keymap
     public KeyCode zoomKey = KeyCode.PageUp, unzoomKey = KeyCode.PageDown;
 
@@ -40,8 +42,6 @@ public class CameraController : MonoBehaviour
         // Locking system
         locking = false;
         currentLockTime = 0f;
-
-        Lock(2f);
 	}
 	
 	// Update is called once per frame
@@ -70,7 +70,11 @@ public class CameraController : MonoBehaviour
         if (collider.tag == "Action")
         {
             // Gestion audimate
+            InterestZone zone = collider.GetComponent<InterestZone>();
+            zone.ActiveZone();  // Active the zone
 
+            
+            //GameState.CurrentChannel.AddActionToChannel(zone);
         }
     }
 
@@ -99,13 +103,15 @@ public class CameraController : MonoBehaviour
     }
 
     /// <summary>
-    /// Lock the camera during some times
+    /// Lock the camera on an action
     /// </summary>
-    /// <param name="_lockTime">(float) : time that the camera is locked</param>
-    void Lock(float _lockTime)
+    /// <param name="_lockTime">(float) Time locked camera</param>
+    /// <param name="zone">(IntersetZone) Zone to focus</param>
+    void Lock(float _lockTime, InterestZone zone)
     {
         locking = true;
         currentLockTime = _lockTime;
+        focusPosition = new Vector2( zone.transform.position.x, zone.transform.position.y);
     }
 
     #endregion
