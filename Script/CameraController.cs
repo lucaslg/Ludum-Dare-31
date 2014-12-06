@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Camera))]
 public class CameraController : MonoBehaviour {
 
     // Speed
@@ -35,6 +36,7 @@ public class CameraController : MonoBehaviour {
         transform.position = new Vector3(transform.position.x + AxisX * horizontalSpeed * Time.deltaTime, transform.position.y + AxisY * verticalSpeed * Time.deltaTime, currentZoom);
 	}
 
+    #region Functions
     void ZoomManager()
     {
         // Zoom management
@@ -53,4 +55,5 @@ public class CameraController : MonoBehaviour {
                 currentZoom = minimumZoom;
         }
     }
+    #endregion
 }
