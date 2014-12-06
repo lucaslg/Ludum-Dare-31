@@ -78,7 +78,7 @@ public class CameraController : MonoBehaviour
             zone.ActiveZone();  // Active the zone
 
             // Lock the camera on the action
-            Lock(5f, zone);
+            //Lock(5f, zone);
             //GameState.CurrentChannel.AddActionToChannel(zone);
         }
     }
