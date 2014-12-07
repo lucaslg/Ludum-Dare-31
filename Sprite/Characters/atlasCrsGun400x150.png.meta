@@ -1,0 +1,278 @@
+fileFormatVersion: 2
+guid: 7dbe590fb1819e34e8d41c29f885eaa8
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: atlasCrsGun400x150_0
+    21300002: atlasCrsGun400x150_1
+    21300004: atlasCrsGun400x150_2
+    21300006: atlasCrsGun400x150_3
+    21300008: atlasCrsGun400x150_4
+    21300010: atlasCrsGun400x150_5
+    21300012: atlasCrsGun400x150_6
+    21300014: atlasCrsGun400x150_7
+    21300016: atlasCrsGun400x150_8
+    21300018: atlasCrsGun400x150_9
+    21300020: atlasCrsGun400x150_10
+    21300022: atlasCrsGun400x150_11
+    21300024: atlasCrsGun400x150_12
+    21300026: atlasCrsGun400x150_13
+    21300028: atlasCrsGun400x150_14
+    21300030: atlasCrsGun400x150_15
+    21300032: atlasCrsGun400x150_16
+    21300034: atlasCrsGun400x150_17
+    21300036: atlasCrsGun400x150_18
+    21300038: atlasCrsGun400x150_19
+    21300040: atlasCrsGun400x150_20
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: atlasCrsGun400x150_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 100
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 100
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_2
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 100
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_3
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 100
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_4
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 100
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_5
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 100
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_6
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 100
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_7
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 100
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 50
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_9
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 50
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_10
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 50
+        width: 50
+        height: 50
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_11
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 50
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_12
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 50
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_13
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 50
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_14
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 50
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_15
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 50
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_17
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 0
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_18
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_19
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 0
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasCrsGun400x150_20
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 50
+        height: 50
+      alignment: 9
+      pivot: {x: .5, y: .280000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
