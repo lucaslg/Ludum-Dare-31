@@ -31,7 +31,10 @@ public class CameraController : MonoBehaviour
     private Vector2 lockedPosition;
 
     // Limitation
-    private Rect mapBoundsCollider = new Rect(5.7f, 2.25f, 11.4f, 4.5f);
+    private bool CanMoveUp;
+    private bool CanMoveRight;
+    private bool CanMoveDown;
+    private bool CanMoveLeft;
 
     #endregion
 
@@ -46,8 +49,6 @@ public class CameraController : MonoBehaviour
         // Locking system
         locking = false;
         currentLockTime = 0f;
-
-        mapBoundsCollider = new Rect(transform.position.x - mapBoundsCollider.xMin, transform.position.y - mapBoundsCollider.yMin, mapBoundsCollider.width, mapBoundsCollider.height);
      }
 
     // Update is called once per frame
@@ -61,6 +62,23 @@ public class CameraController : MonoBehaviour
             ZoomManager();
 
             // Update the position
+            if (!CanMoveUp && AxisY < 0)
+            {
+                AxisY = 0;
+            }
+            if (!CanMoveDown && AxisY > 0)
+            {
+                AxisY = 0;
+            }
+            if (!CanMoveLeft && AxisX < 0)
+            {
+                AxisX = 0;
+            }
+            if (!CanMoveRight && AxisX > 0)
+            {
+                AxisX = 0;
+            }
+
             transform.position = new Vector3(transform.position.x + AxisX * horizontalSpeed * Time.deltaTime, transform.position.y + AxisY * verticalSpeed * Time.deltaTime, currentZoom);
 
             CollideManager();
@@ -97,29 +115,47 @@ public class CameraController : MonoBehaviour
     /// </summary>
     void CollideManager()
     {
-        Ray ray = gameObject.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
+        
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 100))
-            Debug.Log("I'm looking at " + hit.transform.name);
-        else
-            Debug.Log("I'm looking at nothing!");
-        Debug.DrawRay(transform.position, ray.direction*100, Color.green);
 
-        if (transform.position.x > mapBoundsCollider.xMax)
+        Ray ray = gameObject.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5F, 0.0F, 0)); // Top
+        if (!Physics.Raycast(ray, out hit, 100))
         {
-            transform.position = new Vector3(mapBoundsCollider.xMax, transform.position.y, transform.position.z);
+            CanMoveUp = false;
         }
-        else if (transform.position.x < mapBoundsCollider.xMin)
+        else
         {
-            transform.position = new Vector3(mapBoundsCollider.xMin, transform.position.y, transform.position.z);
+            CanMoveUp = true;
         }
-        if (transform.position.y > mapBoundsCollider.yMax)
+
+        ray = gameObject.GetComponent<Camera>().ViewportPointToRay(new Vector3(1.0F, 0.5F, 0)); // Right
+        if (!Physics.Raycast(ray, out hit, 100))
         {
-            transform.position = new Vector3(transform.position.x, mapBoundsCollider.yMax, transform.position.z);
+            CanMoveRight = false;
         }
-        else if (transform.position.y < mapBoundsCollider.yMin)
+        else
         {
-            transform.position = new Vector3(transform.position.x, mapBoundsCollider.yMin, transform.position.z);
+            CanMoveRight = true;
+        }
+
+        ray = gameObject.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5F, 1.0F, 0)); // Bottom
+        if (!Physics.Raycast(ray, out hit, 100))
+        {
+            CanMoveDown = false;
+        }
+        else
+        {
+            CanMoveDown = true;
+        }
+
+        ray = gameObject.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.0F, 0.5F, 0)); // Left
+        if (!Physics.Raycast(ray, out hit, 100))
+        {
+            CanMoveLeft = false;
+        }
+        else
+        {
+            CanMoveLeft = true;
         }
     }
 
