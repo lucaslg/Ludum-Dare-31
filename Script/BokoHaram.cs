@@ -2,18 +2,18 @@
 using UnityEngine;
 using System.Collections;
 
-public class AlJazeera : Channel
-{
-    #region Singleton Implementation
-    private static AlJazeera _instance = null;
+public class BokoHaram : Channel {
 
-    public static AlJazeera Instance
+    #region Singleton Implementation
+    private static BokoHaram _instance = null;
+
+    public static BokoHaram Instance
     {
         get
         {
             if (_instance == null)
             {
-                _instance = new AlJazeera();
+                _instance = new BokoHaram();
             }
             return _instance;
         }
@@ -23,7 +23,6 @@ public class AlJazeera : Channel
         }
     }
     #endregion
-
 
     public Dictionary<EActionTag, List<string>> SpeakerComments;
     public Dictionary<EActionTag, List<string>> Tweets;
@@ -39,43 +38,44 @@ public class AlJazeera : Channel
         // Chaos comments
         SpeakerComments.Add(EActionTag.Chaos, new List<string>()
         {
-            "At least a dozen buildings were set on fire around the city, many in the vicinity of Ferguson Market and Liquor, the store Michael Brown was in before he was killed by Officer Wilson. ",
-            "Several stores were looted and vandalized during the protests."
+            "It happens that Allah's slave do something in which he sees no harm, but that will make him fall in hell for seventies autumns.",
+            "They're is Allah and only Allah. They bring the seed of chaos which is the mark of the Sheitan. They call for their anhilation!"
         });
 
         // Crime comments
         SpeakerComments.Add(EActionTag.Crime, new List<string>()
         {
-            "As the night goes on, the situation grows more intense. Buildings are set on fire, and looting are reported in several businesses.",
-            "Protesters surge forward, throwing objects at officers in riot gear. The sound of gunfire can be heard. A vehicle was just set on fire."
+            "The misbelievers respects no law. Death is the only response.",
+            "These mens should fear God, but white capitalism eated the soul of these brothers!",
+            "Their state can't even protect their people against the thieves! Their hands should be cutted right now!"
         });
 
         // Misery comments
         SpeakerComments.Add(EActionTag.Misery, new List<string>()
         {
-            "African-Americans, most particulary African-Americans men, are still likely more to be stopped and searched by police, charged with crimes and sentenced by longer prison terms.",
-            "African-Americans are afflicted by discrimination."
+            "Allah gave us oil wells and the infidels live in misery ! They shall hear the true meaning of God !",
+            "Do not pity those who do not cherish God and his glory !"
         });
 
         // Order comments
         SpeakerComments.Add(EActionTag.Order, new List<string>()
         {
-            "Police officers use tear gas and smoke to disperse people who are hurling rocks and breaking the windows of parked police cruisers.",
-            "Confrontations between protesters and law enforcement officers continue even after Gov. Jay Nixon deployed the Missouri National Guard to help quell the unrest."
+            "It's only dogs fighting dogs, brothers.",
+            "Look, look at the sionist american order my borthers!"
         });
 
         // Peace comments
         SpeakerComments.Add(EActionTag.Peace, new List<string>()
         {
-            "The first amendement to the United States protects the Freedom of Speech and the right to demonstrate.",
-            "The announcement of the Great Jury set off another wave of protests."
+            "These christians are filled with lies! They hide their true nature behind many faces, but they are snakes!",
+            "Don't believe what you see, they are aaaaall sodomites. Hamdulila."
         });
 
         // Police Violence comments
         SpeakerComments.Add(EActionTag.PoliceViolence, new List<string>()
         {
-            "In some places, African-Americans are not treated with the proper respect.",
-            "Michael Brown, an unarmed black teenager, was shot and killed on Aug. 9."
+            "The infidels grips to their dying world, corrupted by sex and music, but their world is dying brothers!",
+            "These dogs would have been beheaded!"
         });
         #endregion Speaker's comments
 
@@ -88,45 +88,45 @@ public class AlJazeera : Channel
         // Chaos Tweets
         Tweets.Add(EActionTag.Chaos, new List<string>()
         {
-            "Take food stamps away from all these losers. They burn our flag, shut this #chimpout immediately #shutitdown",
-            "They just have set fire to my KFC !!!!!!! #colonelsanders"
+
+            "hide your wifes, your daughters and the girls who are both #muslimLife",
+            "Allah's wrath has falled on the sheitan land! #GODUNDCHAINED #Lamborghini"
         });
 
         // Crime Tweets
         Tweets.Add(EActionTag.Crime, new List<string>()
         {
-            "If #BlackLivesMatter why do Blacks keep killing each other? #chimpout",
-            "Glued to livestreams for hours watching the #chimpout in #Ferguson tonight. Running out of popcorn",
-            "Just put a new brush gaurd on my truck...no time like the present to test it out !"
+            "ouais mon pote, hang all dirty jews and christians, tahu les frères! #THUGLIFESYRIA #M60PICKUP",
+            "Black americans muslim are sodomites barbarians and deserve nothing but slavery. Salem. #Arabianempire"
         });
 
         // Misery Tweets
         Tweets.Add(EActionTag.Misery, new List<string>()
         {
-            "Police should Protect people, not Kill them #injustice",
-            "Actually sad to see how African-Americans are treated !!"
+            "La ilaha illa Allah, ha la ili, hay yo",
+            "Hili b'Allah, hey, hili bay yo they're not getting arab money",
+            "if only they had oil wells… but we'll invade them either way #HOWIRONIC"
         });
 
         // Order Tweets
         Tweets.Add(EActionTag.Order, new List<string>()
         {
-            "We support the St. Louis City and County Police. #trueamericans",
-            "Order has to be maintained in Ferguson. It cannot go on like that… #order"
+            "Stoning to death prove to be the most efficient way to impress people  #silexfrvr",
+            "Salamaleikoum, im a good looking virgin in search for a true soldier of god. Call me. #ConvertedWhiteSlut"
         });
 
         // Peace Tweets
         Tweets.Add(EActionTag.Peace, new List<string>()
         {
-            "Here are the real activists !",
-            "It’s a good thing to see people fight for their rights !",
-            "Real Live Liberal America !"
+            "American mens had their dick and ball cut off by all thes feminist gay shit! #AmericanAreGay",
+            "i think i see a killer CIA drone up my house #PROBABLYDEADSOON #FUCKNSA"
         });
 
         // Police Violence Tweets
         Tweets.Add(EActionTag.PoliceViolence, new List<string>()
         {
-            "The US Constitution is supposed to protect this people !",
-            "Americans=no history/no education /no decency"
+            "it's not hallal, tout ça #92i",
+            "'terrorize Allah's ennemy and yours' QURAN , 8:60 #AbuBakr"
         });
         #endregion Tweets
         /* ******************************************************************************************
