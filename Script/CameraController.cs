@@ -27,13 +27,16 @@ public class CameraController : MonoBehaviour
     // Keymap
     public KeyCode zoomKey = KeyCode.PageUp, unzoomKey = KeyCode.PageDown;
 
-    public Vector2 direction;
-    public Vector2 lockedPosition;
+    private Vector2 direction;
+    private Vector2 lockedPosition;
+
+    // Limitation
+    private Rect mapBoundsCollider = new Rect(5.7f, 2.25f, 11.4f, 4.5f);
 
     #endregion
 
     // Use this for initialization
-	void Start () 
+    void Start()
     {
         currentZoom = transform.position.z;
         // Zoom Management 
@@ -43,9 +46,11 @@ public class CameraController : MonoBehaviour
         // Locking system
         locking = false;
         currentLockTime = 0f;
-	}
-	
-	// Update is called once per frame
+
+        mapBoundsCollider = new Rect(transform.position.x - mapBoundsCollider.xMin, transform.position.y - mapBoundsCollider.yMin, mapBoundsCollider.width, mapBoundsCollider.height);
+     }
+
+    // Update is called once per frame
     void Update()
     {
         if (!locking)
@@ -57,6 +62,8 @@ public class CameraController : MonoBehaviour
 
             // Update the position
             transform.position = new Vector3(transform.position.x + AxisX * horizontalSpeed * Time.deltaTime, transform.position.y + AxisY * verticalSpeed * Time.deltaTime, currentZoom);
+
+            CollideManager();
         }
         else
         {
@@ -84,6 +91,29 @@ public class CameraController : MonoBehaviour
     }
 
     #region Camera Functions
+
+    /// <summary>
+    /// Camera collide the bounds of the map
+    /// </summary>
+    void CollideManager()
+    {
+        if (transform.position.x > mapBoundsCollider.xMax)
+        {
+            transform.position = new Vector3(mapBoundsCollider.xMax, transform.position.y, transform.position.z);
+        }
+        else if (transform.position.x < mapBoundsCollider.xMin)
+        {
+            transform.position = new Vector3(mapBoundsCollider.xMin, transform.position.y, transform.position.z);
+        }
+        if (transform.position.y > mapBoundsCollider.yMax)
+        {
+            transform.position = new Vector3(transform.position.x, mapBoundsCollider.yMax, transform.position.z);
+        }
+        else if (transform.position.y < mapBoundsCollider.yMin)
+        {
+            transform.position = new Vector3(transform.position.x, mapBoundsCollider.yMin, transform.position.z);
+        }
+    }
 
     /// <summary>
     /// Camera zoom manager
