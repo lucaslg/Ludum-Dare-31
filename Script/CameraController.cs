@@ -10,8 +10,8 @@ public class CameraController : MonoBehaviour
     #region Attributes
 
     // Speed
-    public float HorizontalSpeed = 1f;
-    public float VerticalSpeed = 1f;
+    public float HorizontalSpeed = 3f;
+    public float VerticalSpeed = 3f;
 
     // Zoom
     public float MinimumZoom = 0f;
@@ -111,7 +111,13 @@ public class CameraController : MonoBehaviour
 
     #region Camera Functions
 
+    private void ManageInterestZone()
+    {
+        RaycastHit hit;
 
+        Ray ray = new Ray(transform.position, Vector3.forward * 100);
+        //Physics.Raycast()
+    }
 
     /// <summary>
     /// Camera collide the bounds of the map
