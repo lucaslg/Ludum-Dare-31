@@ -23,15 +23,45 @@ public class GameState : MonoBehaviour
     }
     #endregion
 
-    public static Channel CurrentChannel;
+    public static EChannel CurrentChannel { get; private set; }
 
-    void Start()
+    /// <summary>
+    /// Time before GameMode Channel Switch need to be activated
+    /// </summary>
+    public static float ChannelSwitchTimer;
+
+    protected void Start()
     {
-        
+        CurrentChannel = EChannel.FoxNews;
     }
 
-    public static void ChangeChannel(Channel chan)
+
+    /// <summary>
+    /// Zap to the next channel :
+    ///     1) Fox News
+    ///     2) Al Jazeera
+    ///     3) Anarchy TV
+    ///     4) Boko Haram
+    /// </summary>
+    public static void ZapToNextChannel()
     {
-        CurrentChannel = chan;
+        switch (CurrentChannel)
+        {
+            case EChannel.FoxNews:
+                CurrentChannel = EChannel.AlJazeera;
+                break;
+
+            case EChannel.AlJazeera:
+                CurrentChannel = EChannel.AnarchyTV;
+                break;
+
+            case EChannel.AnarchyTV:
+                CurrentChannel = EChannel.BokoHaram;
+                break;
+
+            case EChannel.BokoHaram:
+                CurrentChannel = EChannel.None;
+                break;
+        }
     }
 }

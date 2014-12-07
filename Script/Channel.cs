@@ -9,7 +9,8 @@ public enum EChannel
     FoxNews = 1,
     AlJazeera = 2,
     BokoHaram = 3,
-    AnarchyTV = 4
+    AnarchyTV = 4,
+    None = 10
 }
 
 public enum EAudimatState

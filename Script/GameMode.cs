@@ -33,4 +33,41 @@ public class GameMode : MonoBehaviour
     public const float AudimatIncreaseDelay = 0.5f;
 
     #endregion
+
+    protected void Start()
+    {
+        
+    }
+
+    protected void Update()
+    {
+        if (GameState.ChannelSwitchTimer <= 0 && 
+            GameState.CurrentChannel != EChannel.None)
+        {
+            GameState.ZapToNextChannel();
+        }
+    }
+
+    /// <summary>
+    /// Set the gamestate timer to a given duration and start a coroutine to decrement it
+    /// </summary>
+    /// <param name="duration">duration of Gamestate timer</param>
+    public void SetupGameStateTimer(float duration)
+    {
+        GameState.ChannelSwitchTimer = duration;
+        StartCoroutine(Timer());
+    }
+
+    private IEnumerator Timer()
+    {
+        while (GameState.ChannelSwitchTimer > 0)
+        {
+            GameState.ChannelSwitchTimer -= Time.deltaTime;
+            if (GameState.ChannelSwitchTimer < 0)
+            {
+                GameState.ChannelSwitchTimer = 0;
+            }
+        }
+        yield return 0;
+    }
 }
