@@ -14,18 +14,12 @@ public enum EActionTag
 }
 
 // Required component
-[RequireComponent(typeof(Animation))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class InterestZone : MonoBehaviour
 {
     #region Attributes
 
-    public bool IsActive { get; private set; }
-
-    private Animation _animation;
-
-    public float TimeActive = 2f;
-    private float _currentTime;
+    public bool HasBennSeen { get; private set; }
 
     public EChannel ChannelTarget;
     public EActionTag[] Tags;
@@ -35,24 +29,13 @@ public class InterestZone : MonoBehaviour
     // Use this for initialization
 	protected void Start () 
     {
-        IsActive = false;
-
-        // Initialisation
-        _animation = GetComponent<Animation>();
+        HasBennSeen = false;
 	}
 	
 	// Update is called once per frame
     protected void Update () 
     {
-        if (IsActive)
-        {
-            _currentTime -= Time.deltaTime;
 
-            if (_currentTime < 0)
-            {
-                IsActive = false;
-            }
-        }
 	}
 
     /// <summary>
@@ -60,8 +43,7 @@ public class InterestZone : MonoBehaviour
     /// </summary>
     public void Activate()
     {
-        _currentTime = TimeActive;
-        animation.Play();
+        HasBennSeen = true;
     }
 
     /// <summary>
