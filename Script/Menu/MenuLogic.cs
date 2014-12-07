@@ -7,6 +7,8 @@ public class MenuLogic : MonoBehaviour
 
     public GameObject FoxNewsParentGameObject;
     public GameObject AlJazeeraParentGameObject;
+    public GameObject BokoHaramParentObject;
+    public GameObject AnarchyTVParentObject;
     public GameObject ScrambleParentGameObject;
     public GameObject MainPanel;
     public GameObject CreditsPanel;
@@ -48,7 +50,7 @@ public class MenuLogic : MonoBehaviour
             _waitTime = Random.Range(MinWait, MaxWait);
 
             _currentChannel++;
-            if (_currentChannel > 2)
+            if (_currentChannel > 3)
             {
                 _currentChannel = 0;
             }
@@ -60,8 +62,7 @@ public class MenuLogic : MonoBehaviour
                         Debug.Log("[MENU] Switch to Fox News");
                     }
                     ScrambleParentGameObject.SetActive(true);
-                    AlJazeeraParentGameObject.SetActive(false);
-                    FoxNewsParentGameObject.SetActive(false);
+                    DeactivateAllChannels();
 
                     yield return new WaitForSeconds(ScrambleWaitTime);
 
@@ -74,13 +75,38 @@ public class MenuLogic : MonoBehaviour
                         Debug.Log("[MENU] Switch to Al Jazeera");
                     }
                     ScrambleParentGameObject.SetActive(true);
-                    FoxNewsParentGameObject.SetActive(false);
-                    AlJazeeraParentGameObject.SetActive(false);
+                    DeactivateAllChannels();
 
                     yield return new WaitForSeconds(ScrambleWaitTime);
 
                     ScrambleParentGameObject.SetActive(false);
                     AlJazeeraParentGameObject.SetActive(true);
+                    break;
+                case 2:
+                    if (DebugEnabled)
+                    {
+                        Debug.Log("[MENU] Switch to Boko Haram");
+                    }
+                    ScrambleParentGameObject.SetActive(true);
+                    DeactivateAllChannels();
+
+                    yield return new WaitForSeconds(ScrambleWaitTime);
+
+                    ScrambleParentGameObject.SetActive(false);
+                    BokoHaramParentObject.SetActive(true);
+                    break;
+                case 3:
+                    if (DebugEnabled)
+                    {
+                        Debug.Log("[MENU] Switch to Anarchy TV");
+                    }
+                    ScrambleParentGameObject.SetActive(true);
+                    DeactivateAllChannels();
+
+                    yield return new WaitForSeconds(ScrambleWaitTime);
+
+                    ScrambleParentGameObject.SetActive(false);
+                    AnarchyTVParentObject.SetActive(true);
                     break;
             }
             yield return new WaitForSeconds(_waitTime);
@@ -110,5 +136,13 @@ public class MenuLogic : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    private void DeactivateAllChannels()
+    {
+        FoxNewsParentGameObject.SetActive(false);
+        AlJazeeraParentGameObject.SetActive(false);
+        BokoHaramParentObject.SetActive(false);
+        AnarchyTVParentObject.SetActive(false);
     }
 }
