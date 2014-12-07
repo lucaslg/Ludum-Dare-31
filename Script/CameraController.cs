@@ -97,6 +97,14 @@ public class CameraController : MonoBehaviour
     /// </summary>
     void CollideManager()
     {
+        Ray ray = gameObject.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 100))
+            Debug.Log("I'm looking at " + hit.transform.name);
+        else
+            Debug.Log("I'm looking at nothing!");
+        Debug.DrawRay(transform.position, ray.direction*100, Color.green);
+
         if (transform.position.x > mapBoundsCollider.xMax)
         {
             transform.position = new Vector3(mapBoundsCollider.xMax, transform.position.y, transform.position.z);
