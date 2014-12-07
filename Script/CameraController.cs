@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
 
     // Zoom
     public float minimumZoom = 0f;
-    public float maximumZoom = 2f;
+    public float maximumZoom = 1f;
     public float speedZoom = 1f;
     private float currentZoom;
 
