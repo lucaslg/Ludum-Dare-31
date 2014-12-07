@@ -1,0 +1,135 @@
+fileFormatVersion: 2
+guid: afccfe76c96fb3e47aec69f664742ef7
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: atlasProps300x150_0
+    21300002: atlasProps300x150_1
+    21300004: atlasProps300x150_2
+    21300006: atlasProps300x150_3
+    21300008: atlasProps300x150_5
+    21300010: atlasProps300x150_6
+    21300012: atlasProps300x150_7
+    21300014: atlasProps300x150_7
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 9
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: atlasProps300x150_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 109
+        width: 42
+        height: 23
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasProps300x150_1
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 109
+        width: 59
+        height: 28
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasProps300x150_2
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 110
+        width: 44
+        height: 17
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasProps300x150_3
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 109
+        width: 35
+        height: 18
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasProps300x150_5
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 73
+        width: 9
+        height: 8
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasProps300x150_6
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 73
+        width: 5
+        height: 8
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasProps300x150_7
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 29
+        width: 20
+        height: 35
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: atlasProps300x150_7
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 73
+        width: 13
+        height: 8
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
