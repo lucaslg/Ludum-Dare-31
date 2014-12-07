@@ -33,7 +33,7 @@ public class InterestZone : MonoBehaviour
     #endregion
 
     // Use this for initialization
-	void Start () 
+	protected void Start () 
     {
         IsActive = false;
 
@@ -42,28 +42,30 @@ public class InterestZone : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+    protected void Update () 
     {
         if (IsActive)
         {
             _currentTime -= Time.deltaTime;
 
             if (_currentTime < 0)
+            {
                 IsActive = false;
+            }
         }
 	}
 
     /// <summary>
     /// Active the interest zone
     /// </summary>
-    public void ActiveZone()
+    public void Activate()
     {
         _currentTime = TimeActive;
         animation.Play();
     }
 
     /// <summary>
-    /// Return the tags of the InterstZone
+    /// Returns the tags of the InterestZone
     /// </summary>
     /// <returns>(ActionTag[])</returns>
     public EActionTag[] GetTags()
