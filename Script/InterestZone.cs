@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum ActionTag
+public enum EActionTag
 {
     // Define the tags
     /* misère, violence policière, délinquance, peace, chaos, ordre */
-    ORDER = 0,
-    POLICE_VIOLENCE = 1,
-    PEACE = 2,
-    CHAOS = 3,
-    CRIME = 4,
-    MISERY = 5
+    Order = 0,
+    PoliceViolence = 1,
+    Peace = 2,
+    Chaos = 3,
+    Crime = 4,
+    Misery = 5
 }
 
 // Required component
@@ -18,46 +18,38 @@ public enum ActionTag
 [RequireComponent(typeof(SpriteRenderer))]
 public class InterestZone : MonoBehaviour
 {
-
     #region Attributes
 
-    private bool isActive;  // Is the Zone active?
-    public bool IsActive
-    {
-        get
-        {
-            return isActive;
-        }
-    }
+    public bool IsActive { get; private set; }
 
-    private Animation animation;
+    private Animation _animation;
 
-    public float timeActive = 2f;
-    private float currentTime;
+    public float TimeActive = 2f;
+    private float _currentTime;
 
     public EChannel ChannelTarget;
-    public ActionTag[] tags;
+    public EActionTag[] Tags;
 
     #endregion
 
     // Use this for initialization
 	void Start () 
     {
-        isActive = false;
+        IsActive = false;
 
         // Initialisation
-        animation = GetComponent<Animation>();
+        _animation = GetComponent<Animation>();
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-        if (isActive)
+        if (IsActive)
         {
-            currentTime -= Time.deltaTime;
+            _currentTime -= Time.deltaTime;
 
-            if (currentTime < 0)
-                isActive = false;
+            if (_currentTime < 0)
+                IsActive = false;
         }
 	}
 
@@ -66,7 +58,7 @@ public class InterestZone : MonoBehaviour
     /// </summary>
     public void ActiveZone()
     {
-        currentTime = timeActive;
+        _currentTime = TimeActive;
         animation.Play();
     }
 
@@ -74,8 +66,8 @@ public class InterestZone : MonoBehaviour
     /// Return the tags of the InterstZone
     /// </summary>
     /// <returns>(ActionTag[])</returns>
-    public ActionTag[] GetTags()
+    public EActionTag[] GetTags()
     {
-        return tags;
+        return Tags;
     }
 }

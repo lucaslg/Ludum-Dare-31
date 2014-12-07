@@ -26,8 +26,8 @@ public class Channel : MonoBehaviour
     public GameObject NewsTicker;
     public GameObject audimatBar;
 
-    public ActionTag[] PositiveTags;
-    public ActionTag[] NegativeTags;
+    public EActionTag[] PositiveTags;
+    public EActionTag[] NegativeTags;
 
     [HideInInspector]
     public EAudimatState AudimatState;
@@ -72,10 +72,10 @@ public class Channel : MonoBehaviour
         int positiveMatch = 0;
         int negativeMatch = 0;
 
-        foreach (ActionTag actionTag in obj.tags)
+        foreach (EActionTag actionTag in obj.Tags)
         {
             int i = 0;
-            while (i < obj.tags.Length)
+            while (i < obj.Tags.Length)
             {
                 if (PositiveTags[i] == actionTag)
                 {
