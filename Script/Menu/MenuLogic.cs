@@ -9,7 +9,14 @@ public class MenuLogic : MonoBehaviour
     public GameObject AlJazeeraParentGameObject;
     public GameObject BokoHaramParentObject;
     public GameObject AnarchyTVParentObject;
+
+    public GameObject FoxNewsAudio;
+    public GameObject AlJazeeraAudio;
+    public GameObject BokoHaramAudio;
+    public GameObject AnarchyTVAudio;
+
     public GameObject ScrambleParentGameObject;
+
     public GameObject MainPanel;
     public GameObject CreditsPanel;
 
@@ -30,6 +37,11 @@ public class MenuLogic : MonoBehaviour
         FoxNewsParentGameObject.SetActive(true);
 	    CreditsPanel.SetActive(false);
 	    MainPanel.SetActive(true);
+
+        FoxNewsAudio.GetComponent<AudioSource>().Play();
+        AlJazeeraAudio.GetComponent<AudioSource>().Play();
+        BokoHaramAudio.GetComponent<AudioSource>().Play();
+        AnarchyTVAudio.GetComponent<AudioSource>().Play();
 
         if(Application.platform == RuntimePlatform.OSXWebPlayer || Application.platform == RuntimePlatform.WindowsWebPlayer)
         {
@@ -68,6 +80,7 @@ public class MenuLogic : MonoBehaviour
 
                     ScrambleParentGameObject.SetActive(false);
                     FoxNewsParentGameObject.SetActive(true);
+                    FoxNewsAudio.GetComponent<AudioSource>().mute = false;
                     break;
                 case 1:
                     if (DebugEnabled)
@@ -81,6 +94,7 @@ public class MenuLogic : MonoBehaviour
 
                     ScrambleParentGameObject.SetActive(false);
                     AlJazeeraParentGameObject.SetActive(true);
+                    AlJazeeraAudio.GetComponent<AudioSource>().mute = false;
                     break;
                 case 2:
                     if (DebugEnabled)
@@ -94,6 +108,7 @@ public class MenuLogic : MonoBehaviour
 
                     ScrambleParentGameObject.SetActive(false);
                     BokoHaramParentObject.SetActive(true);
+                    BokoHaramAudio.GetComponent<AudioSource>().mute = false;
                     break;
                 case 3:
                     if (DebugEnabled)
@@ -107,6 +122,7 @@ public class MenuLogic : MonoBehaviour
 
                     ScrambleParentGameObject.SetActive(false);
                     AnarchyTVParentObject.SetActive(true);
+                    AnarchyTVAudio.GetComponent<AudioSource>().mute = false;
                     break;
             }
             yield return new WaitForSeconds(_waitTime);
@@ -144,5 +160,14 @@ public class MenuLogic : MonoBehaviour
         AlJazeeraParentGameObject.SetActive(false);
         BokoHaramParentObject.SetActive(false);
         AnarchyTVParentObject.SetActive(false);
+        MuteAllChannels();
+    }
+
+    private void MuteAllChannels()
+    {
+        FoxNewsAudio.GetComponent<AudioSource>().mute = true;
+        AlJazeeraAudio.GetComponent<AudioSource>().mute = true;
+        BokoHaramAudio.GetComponent<AudioSource>().mute = true;
+        AnarchyTVAudio.GetComponent<AudioSource>().mute = true;
     }
 }
