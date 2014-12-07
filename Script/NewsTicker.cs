@@ -54,7 +54,6 @@ public class NewsTicker : MonoBehaviour
 
                 _startingPosition = new Vector3(Screen.width / 2.0f + _textComponentSize.x / 2.0f, 0.0f, 0.0f);
 
-                Debug.Log(_startingPosition);
                 _textComponent.rectTransform.localPosition = _startingPosition;
 
                 _initialized = true;
