@@ -88,6 +88,8 @@ public class AnarchyTV : Channel
          *                                  Tweets initialization                                   *
          * **************************************************************************************** */
         #region Tweets
+        Tweets = new Dictionary<EActionTag, List<string>>();
+
         // Chaos Tweets
         Tweets.Add(EActionTag.Chaos, new List<string>()
         {
