@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 // Required component
@@ -16,21 +15,21 @@ public class CameraController : MonoBehaviour
 
     // Zoom
     public float MinimumZoom = 0f;
-    public float MaximumZoom = 10f;
-    public float SpeedZoom = 3f;
+    public float MaximumZoom = 1f;
+    public float SpeedZoom = 1f;
     private float _currentZoom;
-    private float _friendlyCurrentZoom;
 
-    /// <summary>
-    /// True if the camera is locked (can't move)
-    /// </summary>
-    public bool IsLocked;
+    // Locking system
+    public float LockTime;
+    private bool _isLocked;   // Is the camera locked
+    private float _currentLockTime;  // Current locktime
 
     // Keymap
     public KeyCode  ZoomKey = KeyCode.PageUp, 
                     UnzoomKey = KeyCode.PageDown;
 
     private Vector2 _direction;
+    private Vector2 _lockedPosition;
 
     // Limitation
     private bool _canMoveUp;
@@ -43,20 +42,20 @@ public class CameraController : MonoBehaviour
     // Use this for initialization
     protected void Start()
     {
-        _friendlyCurrentZoom = 0;
         _currentZoom = transform.position.z;
         // Zoom Management 
         MinimumZoom += _currentZoom;
         MaximumZoom += _currentZoom;
 
         // Locking system
-        IsLocked = false;
+        _isLocked = false;
+        _currentLockTime = 0f;
      }
 
     // Update is called once per frame
     protected void Update()
     {
-        if (!IsLocked)
+        if (!_isLocked)
         {
             float axisX = Input.GetAxis("Horizontal");
             float axisY = Input.GetAxis("Vertical");
@@ -84,7 +83,29 @@ public class CameraController : MonoBehaviour
             transform.position = new Vector3(transform.position.x + axisX * HorizontalSpeed * Time.deltaTime, transform.position.y + axisY * VerticalSpeed * Time.deltaTime, _currentZoom);
 
             CollideManager();
-            ManageInterestZone();
+        }
+        else
+        {
+            // Go to the InterestZone
+            GoToLockedPosition();
+
+            _currentLockTime -= Time.deltaTime;
+            if (_currentLockTime < 0f)
+                _isLocked = false;
+        }
+    }
+
+    protected void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.tag == "Action")
+        {
+            // Gestion audimate
+            InterestZone zone = collider.GetComponent<InterestZone>();
+            zone.Activate();  // Active the zone
+
+            // Lock the camera on the action
+            //Lock(5f, zone);
+            //GameState.CurrentChannel.AddActionToChannel(zone);
         }
     }
 
@@ -92,38 +113,10 @@ public class CameraController : MonoBehaviour
 
     private void ManageInterestZone()
     {
-        if (!IsLocked)
-        {
-            RaycastHit hit;
+        RaycastHit hit;
 
-            Ray ray = new Ray(transform.position, Vector3.forward);
-            if (Physics.Raycast(ray, out hit, 100))
-            {
-                if (hit.collider.gameObject.tag == "InterestZone" &&
-                    Math.Abs(_friendlyCurrentZoom - MaximumZoom) < 0.1) // Comparison of floats with 0.1 margin error
-                {
-                    InterestZone zone = hit.collider.gameObject.GetComponent<InterestZone>();
-                    Lock();
-                    zone.Activate();
-                }
-            }
-        }
-        else
-        {
-            RaycastHit hit;
-
-            Ray ray = new Ray(transform.position, Vector3.forward);
-            if (Physics.Raycast(ray, out hit, 100))
-            {
-                if (hit.collider.gameObject.tag == "InterestZone") 
-                {
-                    if (!hit.collider.gameObject.GetComponent<InterestZone>().HasBennSeen)
-                    {
-                        IsLocked = false; // Reset camera Lock
-                    }
-                }
-            }
-        }
+        Ray ray = new Ray(transform.position, Vector3.forward * 100);
+        //Physics.Raycast()
     }
 
     /// <summary>
@@ -131,6 +124,7 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private void CollideManager()
     {
+        
         RaycastHit hit;
 
         Ray ray = gameObject.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5F, 0.0F, 0)); // Top
@@ -182,41 +176,48 @@ public class CameraController : MonoBehaviour
         // Zoom management
         if (Input.GetKey(ZoomKey))   // Zoom
         {
-            if (_currentZoom < MaximumZoom)
-            {
-                _currentZoom += SpeedZoom * Time.deltaTime;
-                _friendlyCurrentZoom += SpeedZoom * Time.deltaTime;
-            }
+            _currentZoom += SpeedZoom * Time.deltaTime;
+
             if (_currentZoom > MaximumZoom)
-            {
-                _friendlyCurrentZoom = MaximumZoom;
                 _currentZoom = MaximumZoom;
-            }
         }
         else if (Input.GetKey(UnzoomKey))    // Unzoom
         {
-            if (_currentZoom > MinimumZoom)
-            {
-                _currentZoom -= SpeedZoom * Time.deltaTime;
-                _friendlyCurrentZoom -= SpeedZoom * Time.deltaTime;
-            }
+            _currentZoom -= SpeedZoom * Time.deltaTime;
+
             if (_currentZoom < MinimumZoom)
-            {
-                _friendlyCurrentZoom = MinimumZoom;
                 _currentZoom = MinimumZoom;
-            }
         }
     }
 
     /// <summary>
     /// Lock the camera on an action for _lockTime seconds
     /// </summary>
-    private void Lock()
+    /// <param name="_lockTime">(float) Time locked camera</param>
+    /// <param name="zone">(IntersetZone) Zone to focus</param>
+    private void Lock(float _lockTime, InterestZone zone)
     {
-        if (!IsLocked)
+        if (!_isLocked)
         {
-            IsLocked = true;
+            _isLocked = true;
+            _currentLockTime = _lockTime;
+            _lockedPosition = new Vector2(zone.transform.position.x, zone.transform.position.y);
         }
     }
+
+    /// <summary>
+    /// Go to the locked position
+    /// </summary>
+    private void GoToLockedPosition()
+    {
+        // Go to the point
+        Vector3 localDirection = ((Vector3)_lockedPosition - this.transform.position);
+
+        // Remember to use the move script
+        _direction = Vector3.Normalize(localDirection);
+
+        transform.Translate(new Vector2(_direction.x * HorizontalSpeed * Time.deltaTime, _direction.y * VerticalSpeed * Time.deltaTime));
+    }
+
     #endregion
 }
