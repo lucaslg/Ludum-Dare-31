@@ -9,7 +9,7 @@ public class GameMode : MonoBehaviour
 
     public const float AudimatIncreaseValue = 1.0f;
 
-    public const float TimeBeforeChannelZapping = 6000.0f;
+    public const float TimeBeforeChannelZapping = 60.0f;
 
     public const float ActionFreezeDuration = 10.0f;
 
@@ -40,17 +40,6 @@ public class GameMode : MonoBehaviour
         GameState.ChannelSwitchTimer = duration;
         GameState.TimerInitialized = true;
         StartCoroutine(Timer());
-    }
-
-    /// <summary>
-    /// Reset every InterestZone.HasBeenSeen to false
-    /// </summary>
-    public void ResetInterestZones()
-    {
-        foreach (InterestZone interestZone in GameState.InterestZoneList)
-        {
-            interestZone.HasBeenSeen = false;
-        }
     }
 
     private IEnumerator Timer()

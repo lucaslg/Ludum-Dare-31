@@ -16,12 +16,16 @@ public class GameState : MonoBehaviour
     private static GameObject _anarchyTvParentGameObject;
     private static GameObject _bokoHaramParentGameObject;
 
+    public static GameObject FergusonCameraInstance { get; private set; }
+
+    [HideInInspector]
     public static List<InterestZone> InterestZoneList = new List<InterestZone>();
 
     /// <summary>
     /// Time before GameMode Channel Switch need to be activated
     /// </summary>
     public static float ChannelSwitchTimer;
+
     public static bool TimerInitialized;
 
     protected void Start()
@@ -35,6 +39,8 @@ public class GameState : MonoBehaviour
         AlJazeeraInstance = _alJazeeraParentGameObject.transform.FindChild("Al Jazeera Logic").GetComponent<AlJazeera>();
         AnarchyTVInstance = _anarchyTvParentGameObject.transform.FindChild("Anarchy TV Logic").GetComponent<AnarchyTV>();
         BokoHaramInstance = _bokoHaramParentGameObject.transform.FindChild("Boko Haram Logic").GetComponent<BokoHaram>();
+
+        FergusonCameraInstance = GameObject.Find("Ferguson/Camera");
 
         _foxNewsParentGameObject.gameObject.SetActive(false);
         _alJazeeraParentGameObject.gameObject.SetActive(false);
@@ -112,6 +118,19 @@ public class GameState : MonoBehaviour
                 CurrentChannel = EChannel.None;
                 _bokoHaramParentGameObject.SetActive(false);
                 break;
+        }
+        ResetInterestZones();
+        FergusonCameraInstance.GetComponent<CameraController>().ResetZoom();
+    }
+
+    /// <summary>
+    /// Reset every InterestZone.HasBeenSeen to false
+    /// </summary>
+    public static void ResetInterestZones()
+    {
+        foreach (InterestZone interestZone in GameState.InterestZoneList)
+        {
+            interestZone.HasBeenSeen = false;
         }
     }
 }

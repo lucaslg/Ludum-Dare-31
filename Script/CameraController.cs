@@ -284,7 +284,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    private void ResetZoom()
+    public void ResetZoom()
     {
         _currentZoom = -13.9f;
         _friendlyCurrentZoom = 0f;
