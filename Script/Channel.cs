@@ -33,10 +33,20 @@ public class Channel : MonoBehaviour
     [HideInInspector]
     public EAudimatState AudimatState;
 
+    [HideInInspector]
+    public Dictionary<EActionTag, List<string>> SpeakerComments;
+
+    [HideInInspector]
+    public Dictionary<EActionTag, List<string>> Tweets;
+
+
     protected void Start()
     {
         CurrentAudimat = AudimatAtStart;
         AudimatState = EAudimatState.Low;
+
+        SpeakerComments = new Dictionary<EActionTag, List<string>>();
+        Tweets = new Dictionary<EActionTag, List<string>>();
     }
 
     protected void Update()

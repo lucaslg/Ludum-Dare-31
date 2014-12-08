@@ -24,17 +24,12 @@ public class AlJazeera : Channel
     }
     #endregion
 
-
-    public Dictionary<EActionTag, List<string>> SpeakerComments;
-    public Dictionary<EActionTag, List<string>> Tweets;
-
     protected new void Start()
     {
         /* ******************************************************************************************
          *                           Speaker's comments initialization                              *
          * **************************************************************************************** */
         #region Speaker's comments
-        SpeakerComments = new Dictionary<EActionTag, List<string>>();
 
         // Chaos comments
         SpeakerComments.Add(EActionTag.Chaos, new List<string>()
@@ -83,7 +78,6 @@ public class AlJazeera : Channel
          *                                  Tweets initialization                                   *
          * **************************************************************************************** */
         #region Tweets
-        Tweets = new Dictionary<EActionTag, List<string>>();
 
         // Chaos Tweets
         Tweets.Add(EActionTag.Chaos, new List<string>()

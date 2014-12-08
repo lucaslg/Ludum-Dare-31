@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 
@@ -8,7 +9,14 @@ using System.Collections;
 public class CameraController : MonoBehaviour
 {
 
+    public bool IsDebugEnabled;
+
     #region Attributes
+
+    public GameObject SubtitlesGameObject;
+    private Subtitles _subtitles;
+    public GameObject NewsTickerGameObject;
+    private NewsTicker _newsTicker;
 
     // Speed
     public float HorizontalSpeed = 3f;
@@ -26,9 +34,11 @@ public class CameraController : MonoBehaviour
     /// </summary>
     public bool IsLocked;
 
+    public static InterestZone FocusedZone;
+
     // Keymap
-    public KeyCode ZoomKey = KeyCode.PageUp,
-                    UnzoomKey = KeyCode.PageDown;
+    public KeyCode ZoomKey = KeyCode.PageUp;
+    public KeyCode UnzoomKey = KeyCode.PageDown;
 
     private Vector2 _direction;
 
@@ -45,6 +55,7 @@ public class CameraController : MonoBehaviour
     {
         _friendlyCurrentZoom = 0;
         _currentZoom = transform.position.z;
+
         // Zoom Management 
         MinimumZoom += _currentZoom;
         MaximumZoom += _currentZoom;
@@ -102,9 +113,10 @@ public class CameraController : MonoBehaviour
                 if (hit.collider.gameObject.tag == "InterestZone" &&
                     Math.Abs(_friendlyCurrentZoom - MaximumZoom) < 0.1) // Comparison of floats with 0.1 margin error
                 {
-                    InterestZone zone = hit.collider.gameObject.GetComponent<InterestZone>();
+                    FocusedZone = hit.collider.gameObject.GetComponent<InterestZone>();
                     Lock();
-                    zone.Focus();
+                    FocusedZone.Focus();
+                    DisplaySubtitles();
                 }
             }
         }
@@ -124,6 +136,81 @@ public class CameraController : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void DisplaySubtitles()
+    {
+        List<EActionTag> winningTags = ComputeWinningTags(FocusedZone.GetTags());
+        
+        int rng = UnityEngine.Random.Range(0, winningTags.Count);
+        string comment = ComputeSubtitleForTag(winningTags[rng]);
+
+        StartCoroutine(SubtitleManagerCoroutine(comment));
+    }
+
+    private List<EActionTag> ComputeWinningTags(EActionTag[] tags)
+    {
+        int score = 0;
+        List<EActionTag> positiveTags = new List<EActionTag>();
+        List<EActionTag> negativeTags = new List<EActionTag>();
+        foreach (EActionTag actionTag in tags)
+        {
+            foreach (EActionTag channelPositiveActionTag in GameState.GetCurrentChannelInstance().PositiveTags)
+            {
+                if (actionTag == channelPositiveActionTag)
+                {
+                    positiveTags.Add(actionTag);
+                    score++;
+                }
+            }
+
+            foreach (EActionTag channelNegativeActionTag in GameState.GetCurrentChannelInstance().NegativeTags)
+            {
+                if (actionTag == channelNegativeActionTag)
+                {
+                    negativeTags.Add(actionTag);
+                    score--;
+                }
+            }
+        }
+
+        if (IsDebugEnabled)
+        {
+            Debug.Log("Tag Score = " + score);
+        }
+
+        if (score > 0)
+        {
+            if (IsDebugEnabled)
+            {
+                Debug.Log("Associated tags : " + positiveTags);
+            }
+            return positiveTags;
+        }
+        else
+        {
+            if (IsDebugEnabled)
+            {
+                Debug.Log("Associated tags : " + negativeTags);
+            }
+            return negativeTags;
+        }
+    }
+
+    private String ComputeSubtitleForTag(EActionTag tag)
+    {
+        int rng = UnityEngine.Random.Range(0, GameState.GetCurrentChannelInstance().SpeakerComments[tag].Count);
+        string comment = GameState.GetCurrentChannelInstance().SpeakerComments[tag][rng];
+        if (IsDebugEnabled)
+        {
+            Debug.Log("ComputeSubtitleForTag returned : " + comment + "\nfor tag : " + tag);
+        }
+        return GameState.GetCurrentChannelInstance().SpeakerComments[tag][rng];
+    }
+
+    private IEnumerator SubtitleManagerCoroutine(string comment)
+    {
+        yield return 0;
     }
 
     /// <summary>

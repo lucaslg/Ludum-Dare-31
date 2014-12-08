@@ -47,6 +47,31 @@ public class GameState : MonoBehaviour
     }
 
     /// <summary>
+    /// Returns the current Channel instance
+    /// </summary>
+    /// <returns>Current Channel Instance, null if channel is not set</returns>
+    public static Channel GetCurrentChannelInstance()
+    {
+        switch (CurrentChannel)
+        {
+            case EChannel.AlJazeera:
+                return AlJazeera.Instance;
+
+            case EChannel.AnarchyTV:
+                return AnarchyTV.Instance;
+
+            case EChannel.BokoHaram:
+                return AlJazeera.Instance;
+
+            case EChannel.FoxNews:
+                return AlJazeera.Instance;
+
+            default:
+                return null;
+        }
+    }
+
+    /// <summary>
     /// Zap to the next channel :
     ///     1) Fox News
     ///     2) Al Jazeera
