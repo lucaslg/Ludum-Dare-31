@@ -4,26 +4,6 @@ using System.Collections;
 
 public class AnarchyTV : Channel 
 {
-    #region Singleton Implementation
-    private static AnarchyTV _instance = null;
-
-    public static AnarchyTV Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new AnarchyTV();
-            }
-            return _instance;
-        }
-        set
-        {
-            _instance = value;
-        }
-    }
-    #endregion
-
     protected new void Start()
     {
         base.Start();
@@ -127,6 +107,25 @@ public class AnarchyTV : Channel
             "Who watches this shit anyway? We're 12 viewers right now! #Stoplivinginafantasyworld"
         });
         #endregion Tweets
+
+        /* ******************************************************************************************
+         *                                   Tags initialization                                    *
+         * **************************************************************************************** */
+
+        #region Tags
+
+        // Positive tags
+        PositiveTags.Add(EActionTag.Chaos);
+        PositiveTags.Add(EActionTag.Misery);
+        PositiveTags.Add(EActionTag.PoliceViolence);
+
+        // Negative tags
+        NegativeTags.Add(EActionTag.Crime);
+        NegativeTags.Add(EActionTag.Order);
+        NegativeTags.Add(EActionTag.Peace);
+
+        #endregion
+
         /* ******************************************************************************************
          *                      End of Dirty Hard coded dialogs initialization                      *
          * **************************************************************************************** */

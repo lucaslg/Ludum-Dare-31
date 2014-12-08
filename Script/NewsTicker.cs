@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -6,29 +7,25 @@ using UnityEngine.UI;
 [RequireComponent(typeof(ContentSizeFitter))]
 public class NewsTicker : MonoBehaviour
 {
+    public bool IsDebugEnabled = false;
+
     private Text _textComponent;
     private Vector2 _textComponentSize;
     private Vector3 _startingPosition;
-    private string[] _currentAudimatMessages;
 
     private bool _initialized = false;
+    private bool _isSpecificNewsDisplayed = false;
 
     public string Separator;
     public static float ScrollingSpeed = 2;
-    public string[] LowAudimatMessages;
-    public string[] MediumAudimatMessages;
-    public string[] HighAudimatMessages;
+    public string[] DefaultNews;
 
     // Awake (First on instantiation flow)
     protected void Awake()
     {
         _textComponent = gameObject.GetComponent<Text>();
         ClearTicker();
-
-        // Populate the currentAudimatMessage array with Low Audimat by default
-        _currentAudimatMessages = LowAudimatMessages;
-
-        PopulateTextComponent(_currentAudimatMessages);
+        PopulateTickerWithDefaultNews();
     }
 
     // Start (Second on instantiation flow)
@@ -40,8 +37,11 @@ public class NewsTicker : MonoBehaviour
 	// Update is called once per frame
     protected void Update()
     {
-        if (!string.IsNullOrEmpty(_textComponent.text))
+        // bypass update if specific news is displayed (scrolling directly handeled in coroutine)
+        // bypass update if there is no text
+        if (!string.IsNullOrEmpty(_textComponent.text) && !_isSpecificNewsDisplayed) 
         {
+            // Have to use a dirty initialized boolean because of content size fitter
             if (!_initialized)
             {
                 GUIStyle guiStyle = new GUIStyle
@@ -51,44 +51,82 @@ public class NewsTicker : MonoBehaviour
                 };
                 _textComponentSize = guiStyle.CalcSize(new GUIContent(_textComponent.text));
 
-
                 _startingPosition = new Vector3(Screen.width / 2.0f + _textComponentSize.x / 2.0f, 0.0f, 0.0f);
 
-                _textComponent.rectTransform.localPosition = _startingPosition;
+                ResetTickerPosition();
 
                 _initialized = true;
+                if (IsDebugEnabled)
+                {
+                    Debug.Log("Initialization done. Starting position = " + _startingPosition);
+                }
+            }
+
+            if (_textComponent.rectTransform.localPosition.x > -_startingPosition.x)
+            {
+                _textComponent.rectTransform.localPosition = new Vector3(_textComponent.rectTransform.localPosition.x - ScrollingSpeed / 100.0f / Time.deltaTime, 0);
             }
             else
             {
-                if (_textComponent.rectTransform.localPosition.x > -_startingPosition.x)
-                {
-                    _textComponent.rectTransform.localPosition = new Vector3(_textComponent.rectTransform.localPosition.x - ScrollingSpeed / 100.0f / Time.deltaTime, 0);
-                }
-                else
-                {
-                    _textComponent.rectTransform.localPosition = _startingPosition;
-                }
+                ResetTickerPosition();
             }
         }
 	}
 
-    public void ChangeAudimat(EAudimatState state)
+    public void DisplaySpecificNews(string news)
     {
-        switch (state)
+        _isSpecificNewsDisplayed = true;
+        StartCoroutine(SpecificNewsDisplayManager(news));
+    }
+
+    public void PopulateTickerWithDefaultNews()
+    {
+        List<int> newsShuffle = new List<int>();
+        int i = 0;
+        while (i < DefaultNews.Length)
         {
-            case EAudimatState.Low:
-                _currentAudimatMessages = LowAudimatMessages;
-                break;
-            case EAudimatState.Medium:
-                _currentAudimatMessages = MediumAudimatMessages;
-                break;
-            case EAudimatState.High:
-                _currentAudimatMessages = HighAudimatMessages;
-                break;
+            newsShuffle.Add(i);
+            i++;
         }
+        newsShuffle.Shuffle();
+
+        int j = 0;
+        while (j < newsShuffle.Count)
+        {
+            _textComponent.text = string.Format("{0} {1} {2}", _textComponent.text, Separator, DefaultNews[newsShuffle[j]].ToUpper());
+            j++;
+        }
+    }
+
+    private IEnumerator SpecificNewsDisplayManager(string news)
+    {
+        bool isScrollFinished = false;
+
         ClearTicker();
-        _initialized = false;
-        PopulateTextComponent(_currentAudimatMessages);
+        _textComponent.text = string.Format("{0} {1} {2}", "- VIEWERS TWEET - ", news.ToUpper(), " - REACT ON #FERGUSON -");
+        yield return 0;
+        ComputeStartingPosition();
+        ResetTickerPosition();
+
+        while (!isScrollFinished)
+        {
+            if (_textComponent.rectTransform.localPosition.x > -_startingPosition.x)
+            {
+                _textComponent.rectTransform.localPosition = new Vector3(_textComponent.rectTransform.localPosition.x - ScrollingSpeed / 100.0f / Time.deltaTime, 0);
+            }
+            else
+            {
+                ClearTicker();
+                PopulateTickerWithDefaultNews();
+                isScrollFinished = true;
+            }
+            yield return 0;
+        }
+
+        ComputeStartingPosition();
+        ResetTickerPosition();
+        _initialized = true;
+        _isSpecificNewsDisplayed = false;
     }
 
     private void ClearTicker()
@@ -96,17 +134,41 @@ public class NewsTicker : MonoBehaviour
         _textComponent.text = string.Empty;
     }
 
-    /// <summary>
-    /// Populate the textComponent with the messages array
-    /// </summary>
-    /// <param name="messages"></param>
-    private void PopulateTextComponent(string[] messages)
-    {         
-        int i = 0;
-        while (i < messages.Length)
+    private void ResetTickerPosition()
+    {
+        _textComponent.rectTransform.localPosition = _startingPosition;
+    }
+
+    private void ComputeStartingPosition()
+    {
+        GUIStyle guiStyle = new GUIStyle
         {
-            _textComponent.text = string.Format("{0} {1} {2}", _textComponent.text, Separator, messages[i].ToUpper());
-            i++;
+            font = _textComponent.font,
+            fontSize = _textComponent.fontSize
+        };
+        _textComponentSize = guiStyle.CalcSize(new GUIContent(_textComponent.text));
+
+        _startingPosition = new Vector3(Screen.width / 2.0f + _textComponentSize.x / 2.0f, 0.0f, 0.0f);
+    }
+}
+
+#region UTILITIES
+
+public static class Utilities
+{
+    public static void Shuffle<T>(this IList<T> list)
+    {
+        System.Random rng = new System.Random();
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = rng.Next(n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
         }
     }
 }
+
+#endregion UTILITIES

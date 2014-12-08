@@ -4,26 +4,6 @@ using System.Collections;
 
 public class FoxNews : Channel 
 {
-    #region Singleton Implementation
-    private static FoxNews _instance = null;
-
-    public static FoxNews Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new FoxNews();
-            }
-            return _instance;
-        }
-        set
-        {
-            _instance = value;
-        }
-    }
-    #endregion
-
     protected new void Start()
     {
         base.Start();
@@ -129,6 +109,25 @@ public class FoxNews : Channel
             "Darren Wilson did what every good citizen should do !!! #SarahPalin"
         });
         #endregion Tweets
+
+        /* ******************************************************************************************
+         *                                   Tags initialization                                    *
+         * **************************************************************************************** */
+
+        #region Tags
+
+        // Positive tags
+        PositiveTags.Add(EActionTag.Crime);
+        PositiveTags.Add(EActionTag.Chaos);
+        PositiveTags.Add(EActionTag.Order);
+        
+        // Negative tags
+        NegativeTags.Add(EActionTag.Misery);
+        NegativeTags.Add(EActionTag.PoliceViolence);
+        NegativeTags.Add(EActionTag.Peace);
+
+        #endregion
+
         /* ******************************************************************************************
          *                      End of Dirty Hard coded dialogs initialization                      *
          * **************************************************************************************** */

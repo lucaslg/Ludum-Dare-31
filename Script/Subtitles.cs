@@ -5,26 +5,30 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Text))]
 public class Subtitles : MonoBehaviour
 {
-    public GameObject Channel;
-
-    private Channel _channel;
     private Text _textComponent;
 
     protected void Start()
     {
         _textComponent = gameObject.GetComponent<Text>();
-        _channel = Channel.GetComponent<Channel>();
+        _textComponent.enabled = false;
     }
 
-    protected void Update()
+    public void DisplaySubtitle(string subtitle, float duration)
     {
-        if (CameraController.FocusedZone)
-        {
-            EActionTag[] InterestZoneTags = CameraController.FocusedZone.GetTags();
-            foreach (var interestZoneTag in InterestZoneTags)
-            {
-                
-            }
-        }
+        StartCoroutine(SubtitleDisplayManager(subtitle, duration));
+    }
+
+    public void Clear()
+    {
+        _textComponent.text = string.Empty;
+    }
+
+    private IEnumerator SubtitleDisplayManager(string subtitle, float duration)
+    {
+        _textComponent.text = subtitle;
+        _textComponent.enabled = true;
+        yield return new WaitForSeconds(duration);
+        Clear();
+        _textComponent.enabled = false;
     }
 }

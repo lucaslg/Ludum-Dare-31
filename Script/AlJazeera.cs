@@ -4,26 +4,6 @@ using System.Collections;
 
 public class AlJazeera : Channel
 {
-    #region Singleton Implementation
-    private static AlJazeera _instance = null;
-
-    public static AlJazeera Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new AlJazeera();
-            }
-            return _instance;
-        }
-        set
-        {
-            _instance = value;
-        }
-    }
-    #endregion
-
     protected new void Start()
     {
         base.Start();
@@ -125,6 +105,25 @@ public class AlJazeera : Channel
             "Americans=no history/no education /no decency"
         });
         #endregion Tweets
+
+        /* ******************************************************************************************
+         *                                   Tags initialization                                    *
+         * **************************************************************************************** */
+
+        #region Tags
+
+        // Positive tags
+        PositiveTags.Add(EActionTag.Misery);
+        PositiveTags.Add(EActionTag.Peace);
+        PositiveTags.Add(EActionTag.PoliceViolence);
+
+        // Negative tags
+        NegativeTags.Add(EActionTag.Crime);
+        NegativeTags.Add(EActionTag.Chaos);
+        NegativeTags.Add(EActionTag.Order);
+        
+        #endregion
+
         /* ******************************************************************************************
          *                      End of Dirty Hard coded dialogs initialization                      *
          * **************************************************************************************** */

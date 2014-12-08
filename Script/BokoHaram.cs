@@ -2,28 +2,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class BokoHaram : Channel {
-
-    #region Singleton Implementation
-    private static BokoHaram _instance = null;
-
-    public static BokoHaram Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new BokoHaram();
-            }
-            return _instance;
-        }
-        set
-        {
-            _instance = value;
-        }
-    }
-    #endregion
-
+public class BokoHaram : Channel 
+{
     protected new void Start()
     {
         base.Start();
@@ -125,6 +105,22 @@ public class BokoHaram : Channel {
             "'terrorize Allah's ennemy and yours' QURAN , 8:60 #AbuBakr"
         });
         #endregion Tweets
+
+        /* ******************************************************************************************
+         *                                   Tags initialization                                    *
+         * **************************************************************************************** */
+        #region Tags
+
+        // Positive tags
+        PositiveTags.Add(EActionTag.Crime);
+        PositiveTags.Add(EActionTag.Chaos);
+        PositiveTags.Add(EActionTag.Misery);
+        PositiveTags.Add(EActionTag.PoliceViolence);
+        PositiveTags.Add(EActionTag.Order);
+        PositiveTags.Add(EActionTag.Peace);
+
+        #endregion
+
         /* ******************************************************************************************
          *                      End of Dirty Hard coded dialogs initialization                      *
          * **************************************************************************************** */

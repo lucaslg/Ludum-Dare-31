@@ -116,7 +116,7 @@ public class CameraController : MonoBehaviour
                     FocusedZone = hit.collider.gameObject.GetComponent<InterestZone>();
                     Lock();
                     FocusedZone.Focus();
-                    DisplaySubtitles();
+                    DisplaySubtitlesAndTweet();
                 }
             }
         }
@@ -138,14 +138,18 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    private void DisplaySubtitles()
+    private void DisplaySubtitlesAndTweet()
     {
         List<EActionTag> winningTags = ComputeWinningTags(FocusedZone.GetTags());
-        
+
         int rng = UnityEngine.Random.Range(0, winningTags.Count);
         string comment = ComputeSubtitleForTag(winningTags[rng]);
 
-        StartCoroutine(SubtitleManagerCoroutine(comment));
+        rng = UnityEngine.Random.Range(0, winningTags.Count);
+        string tweet = ComputeWinningTweetForTag(winningTags[rng]);
+
+        GameState.GetCurrentChannelInstance().Subtitles.GetComponent<Subtitles>().DisplaySubtitle(comment, GameMode.SubtitlesDuration);
+        GameState.GetCurrentChannelInstance().NewsTicker.GetComponent<NewsTicker>().DisplaySpecificNews(tweet);
     }
 
     private List<EActionTag> ComputeWinningTags(EActionTag[] tags)
@@ -183,7 +187,7 @@ public class CameraController : MonoBehaviour
         {
             if (IsDebugEnabled)
             {
-                Debug.Log("Associated tags : " + positiveTags);
+                Debug.Log("Associated tags : " + positiveTags.ToArray().ToString());
             }
             return positiveTags;
         }
@@ -191,7 +195,7 @@ public class CameraController : MonoBehaviour
         {
             if (IsDebugEnabled)
             {
-                Debug.Log("Associated tags : " + negativeTags);
+                Debug.Log("Associated tags : " + negativeTags.ToArray().ToString());
             }
             return negativeTags;
         }
@@ -208,9 +212,15 @@ public class CameraController : MonoBehaviour
         return GameState.GetCurrentChannelInstance().SpeakerComments[tag][rng];
     }
 
-    private IEnumerator SubtitleManagerCoroutine(string comment)
+    private String ComputeWinningTweetForTag(EActionTag tag)
     {
-        yield return 0;
+        int rng = UnityEngine.Random.Range(0, GameState.GetCurrentChannelInstance().Tweets[tag].Count);
+        string tweet = GameState.GetCurrentChannelInstance().Tweets[tag][rng];
+        if (IsDebugEnabled)
+        {
+            Debug.Log("ComputeTweetForTag returned : " + tweet + "\nfor tag : " + tag);
+        }
+        return tweet;
     }
 
     /// <summary>

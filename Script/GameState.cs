@@ -55,16 +55,16 @@ public class GameState : MonoBehaviour
         switch (CurrentChannel)
         {
             case EChannel.AlJazeera:
-                return AlJazeera.Instance;
+                return GameState.AlJazeeraInstance;
 
             case EChannel.AnarchyTV:
-                return AnarchyTV.Instance;
+                return GameState.AnarchyTVInstance;
 
             case EChannel.BokoHaram:
-                return AlJazeera.Instance;
+                return GameState.BokoHaramInstance;
 
             case EChannel.FoxNews:
-                return AlJazeera.Instance;
+                return GameState.FoxNewsInstance;
 
             default:
                 return null;

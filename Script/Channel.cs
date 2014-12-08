@@ -25,13 +25,15 @@ public class Channel : MonoBehaviour
     public float CurrentAudimat = 0;
     public float AudimatAtStart = 50;
     public GameObject NewsTicker;
-    public GameObject audimatBar;
-
-    public EActionTag[] PositiveTags;
-    public EActionTag[] NegativeTags;
+    public GameObject AudimatBar;
+    public GameObject Subtitles;
 
     [HideInInspector]
-    public EAudimatState AudimatState;
+    public List<EActionTag> PositiveTags;
+
+    [HideInInspector]
+    public List<EActionTag> NegativeTags;
+
 
     [HideInInspector]
     public Dictionary<EActionTag, List<string>> SpeakerComments;
@@ -43,7 +45,6 @@ public class Channel : MonoBehaviour
     protected void Start()
     {
         CurrentAudimat = AudimatAtStart;
-        AudimatState = EAudimatState.Low;
 
         SpeakerComments = new Dictionary<EActionTag, List<string>>();
         Tweets = new Dictionary<EActionTag, List<string>>();
@@ -51,31 +52,7 @@ public class Channel : MonoBehaviour
 
     protected void Update()
     {
-        if (CurrentAudimat > GameMode.AudimatLow && CurrentAudimat < GameMode.AudimatMedium)
-        {
-            if (AudimatState != EAudimatState.Low)
-            {
-                AudimatState = EAudimatState.Low;
-                NewsTicker.GetComponent<NewsTicker>().ChangeAudimat(EAudimatState.Low);
 
-            }
-        }
-        else if (CurrentAudimat > GameMode.AudimatMedium && CurrentAudimat < GameMode.AudimatHigh)
-        {
-            if (AudimatState != EAudimatState.Medium)
-            {
-                AudimatState = EAudimatState.Medium;
-                NewsTicker.GetComponent<NewsTicker>().ChangeAudimat(EAudimatState.Medium);
-            }
-        }
-        else if (CurrentAudimat > GameMode.AudimatHigh)
-        {
-            if (AudimatState != EAudimatState.High)
-            {
-                AudimatState = EAudimatState.High;
-                NewsTicker.GetComponent<NewsTicker>().ChangeAudimat(EAudimatState.High);
-            }
-        }
     }
 
     public virtual void AddActionToChannel(InterestZone obj)

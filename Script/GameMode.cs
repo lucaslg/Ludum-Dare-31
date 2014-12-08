@@ -15,13 +15,15 @@ public class GameMode : MonoBehaviour
 
     public const float TimeBeforeChannelZapping = 6000.0f;
 
+    public const float SubtitlesDuration = 5.0f;
+
     #endregion
 
     protected void Start()
     {
         SetupGameStateTimer(TimeBeforeChannelZapping);
     }
-
+    
     protected void Update()
     {
         if (GameState.ChannelSwitchTimer <= 0 && 
