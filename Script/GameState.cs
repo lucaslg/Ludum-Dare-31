@@ -38,8 +38,8 @@ public class GameState : MonoBehaviour
         _anarchyTvParentGameObject.gameObject.SetActive(false);
         _bokoHaramParentGameObject.gameObject.SetActive(false);
 
-        CurrentChannel = EChannel.AlJazeera;
-        _alJazeeraParentGameObject.gameObject.SetActive(true);
+        CurrentChannel = EChannel.FoxNews;
+        _foxNewsParentGameObject.gameObject.SetActive(true);
     }
 
     protected void Update()

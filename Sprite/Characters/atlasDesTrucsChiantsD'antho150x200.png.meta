@@ -122,7 +122,7 @@ TextureImporter:
         width: 50
         height: 50
       alignment: 9
-      pivot: {x: .5, y: .25}
+      pivot: {x: .5, y: .25999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: atlasDesTrucsChiantsD'antho150x200_7
       rect:
@@ -132,7 +132,7 @@ TextureImporter:
         width: 50
         height: 50
       alignment: 9
-      pivot: {x: .5, y: .25}
+      pivot: {x: .5, y: .25999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: atlasDesTrucsChiantsD'antho150x200_8
       rect:
@@ -142,7 +142,7 @@ TextureImporter:
         width: 50
         height: 50
       alignment: 9
-      pivot: {x: .5, y: .25}
+      pivot: {x: .5, y: .25999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: atlasDesTrucsChiantsD'antho150x200_9
       rect:
@@ -152,7 +152,7 @@ TextureImporter:
         width: 50
         height: 50
       alignment: 9
-      pivot: {x: .5, y: .25}
+      pivot: {x: .5, y: .25999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: atlasDesTrucsChiantsD'antho150x200_10
       rect:
