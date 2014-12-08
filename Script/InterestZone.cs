@@ -30,7 +30,7 @@ public class InterestZone : MonoBehaviour
     // Use this for initialization
     protected void Start()
     {
-        animation.playAutomatically = false;
+        //animation.playAutomatically = false;
         HasBeenSeen = false;
         GameState.InterestZoneList.Add(this);
     }
