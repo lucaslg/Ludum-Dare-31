@@ -33,12 +33,13 @@ public class GameState : MonoBehaviour
         AnarchyTVInstance = _anarchyTvParentGameObject.transform.FindChild("Anarchy TV Logic").GetComponent<AnarchyTV>();
         BokoHaramInstance = _bokoHaramParentGameObject.transform.FindChild("Boko Haram Logic").GetComponent<BokoHaram>();
 
+        _foxNewsParentGameObject.gameObject.SetActive(false);
         _alJazeeraParentGameObject.gameObject.SetActive(false);
         _anarchyTvParentGameObject.gameObject.SetActive(false);
         _bokoHaramParentGameObject.gameObject.SetActive(false);
 
-        CurrentChannel = EChannel.FoxNews;
-        _foxNewsParentGameObject.gameObject.SetActive(true);
+        CurrentChannel = EChannel.AlJazeera;
+        _alJazeeraParentGameObject.gameObject.SetActive(true);
     }
 
     protected void Update()
