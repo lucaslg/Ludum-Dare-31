@@ -6,16 +6,12 @@ public class GameMode : MonoBehaviour
     public GameObject FergusonCamera;
 
     #region GAME CONSTS
-    
-    public const float AudimatLow       = 0;
-    public const float AudimatMedium    = 100;
-    public const float AudimatHigh      = 300;
 
     public const float AudimatIncreaseValue = 1.0f;
 
     public const float TimeBeforeChannelZapping = 6000.0f;
 
-    public const float SubtitlesDuration = 10.0f;
+    public const float ActionFreezeDuration = 10.0f;
 
     #endregion
 
@@ -44,6 +40,17 @@ public class GameMode : MonoBehaviour
         GameState.ChannelSwitchTimer = duration;
         GameState.TimerInitialized = true;
         StartCoroutine(Timer());
+    }
+
+    /// <summary>
+    /// Reset every InterestZone.HasBeenSeen to false
+    /// </summary>
+    public void ResetInterestZones()
+    {
+        foreach (InterestZone interestZone in GameState.InterestZoneList)
+        {
+            interestZone.HasBeenSeen = false;
+        }
     }
 
     private IEnumerator Timer()

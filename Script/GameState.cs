@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using System.Collections;
 
 public class GameState : MonoBehaviour
@@ -14,6 +15,8 @@ public class GameState : MonoBehaviour
     private static GameObject _alJazeeraParentGameObject;
     private static GameObject _anarchyTvParentGameObject;
     private static GameObject _bokoHaramParentGameObject;
+
+    public static List<InterestZone> InterestZoneList = new List<InterestZone>();
 
     /// <summary>
     /// Time before GameMode Channel Switch need to be activated

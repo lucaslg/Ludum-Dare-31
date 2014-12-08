@@ -19,7 +19,8 @@ public class InterestZone : MonoBehaviour
 
     public bool IsDebugEnabled = false;
 
-    public bool HasBeenSeen { get; private set; }
+    public bool HasBeenSeen { get; set; }
+
     public EChannel ChannelTarget;
     public EActionTag[] Tags;
     
@@ -29,6 +30,7 @@ public class InterestZone : MonoBehaviour
     protected void Start()
     {
         HasBeenSeen = false;
+        GameState.InterestZoneList.Add(this);
     }
 
     // Update is called once per frame
