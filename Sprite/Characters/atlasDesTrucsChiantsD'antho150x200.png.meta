@@ -35,7 +35,7 @@ TextureImporter:
   textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
-    filterMode: -1
+    filterMode: 0
     aniso: 16
     mipBias: -1
     wrapMode: 1
@@ -62,7 +62,7 @@ TextureImporter:
         width: 50
         height: 50
       alignment: 9
-      pivot: {x: .5, y: .25}
+      pivot: {x: .5, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: atlasDesTrucsChiantsD'antho150x200_1
       rect:
@@ -72,7 +72,7 @@ TextureImporter:
         width: 50
         height: 50
       alignment: 9
-      pivot: {x: .5, y: .25}
+      pivot: {x: .5, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: atlasDesTrucsChiantsD'antho150x200_2
       rect:
@@ -82,7 +82,7 @@ TextureImporter:
         width: 50
         height: 50
       alignment: 9
-      pivot: {x: .5, y: .25}
+      pivot: {x: .5, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: atlasDesTrucsChiantsD'antho150x200_3
       rect:
