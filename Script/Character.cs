@@ -16,6 +16,8 @@ public class Character : MonoBehaviour
 
     private Vector3 lastPosition;   // Get the last position of character : calcul of the moveVector
 
+	private bool isWalking;
+
     public bool lookRight = true;
 
     // Use this for initialization
@@ -23,6 +25,8 @@ public class Character : MonoBehaviour
     {
         moveVector.x = 0;
         moveVector.y = 0;
+
+		isWalking = false;
 
         lastPosition = transform.position;
 
@@ -40,7 +44,7 @@ public class Character : MonoBehaviour
         moveVector = transform.position - lastPosition;
         lastPosition = transform.position;
 
-        spriteRenderer.sortingOrder = 1000 - (int)((MAXIMUM + (transform.position.y) * 100));
+        //spriteRenderer.sortingOrder = 1000 - (int)((MAXIMUM + (transform.position.y) * 100));
 
         // Animation manager (implemented in children)
         ManageAnimation();
@@ -77,13 +81,15 @@ public class Character : MonoBehaviour
         }
 
         // Animation animation
-        if (moveVector.x != 0 || moveVector.y != 0)
+        if (moveVector.x != 0 || moveVector.y != 0 && !isWalking)
         {
             animator.SetBool("walking", true);
+			isWalking = true;
         }
-        else
+        else if (isWalking)
         {
             animator.SetBool("walking", false);
+			isWalking = false;
         }
     }
 
