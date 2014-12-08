@@ -81,7 +81,7 @@ public class Character : MonoBehaviour
         }
 
         // Animation animation
-        if (moveVector.x != 0 || moveVector.y != 0 && !isWalking)
+        if ((moveVector.x != 0 || moveVector.y != 0) && !isWalking)
         {
             animator.SetBool("walking", true);
 			isWalking = true;
