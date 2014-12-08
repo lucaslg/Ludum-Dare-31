@@ -13,55 +13,40 @@ public enum EActionTag
     Misery = 5
 }
 
-// Required component
-[RequireComponent(typeof(Animation))]
-[RequireComponent(typeof(SpriteRenderer))]
 public class InterestZone : MonoBehaviour
 {
     #region Attributes
 
-    public bool IsActive { get; private set; }
+    public bool IsDebugEnabled = false;
 
-    private Animation _animation;
-
-    public float TimeActive = 2f;
-    private float _currentTime;
-
+    public bool HasBeenSeen { get; private set; }
     public EChannel ChannelTarget;
     public EActionTag[] Tags;
-
+    
     #endregion
 
     // Use this for initialization
-	protected void Start () 
+    protected void Start()
     {
-        IsActive = false;
+        HasBeenSeen = false;
+    }
 
-        // Initialisation
-        _animation = GetComponent<Animation>();
-	}
-	
-	// Update is called once per frame
-    protected void Update () 
+    // Update is called once per frame
+    protected void Update()
     {
-        if (IsActive)
-        {
-            _currentTime -= Time.deltaTime;
 
-            if (_currentTime < 0)
-            {
-                IsActive = false;
-            }
-        }
-	}
+    }
 
     /// <summary>
     /// Active the interest zone
     /// </summary>
-    public void Activate()
+    public void Focus()
     {
-        _currentTime = TimeActive;
-        animation.Play();
+        if (IsDebugEnabled)
+        {
+            Debug.Log(gameObject.name + " just get focused by the camera.");
+        }
+        HasBeenSeen = true;
     }
 
     /// <summary>

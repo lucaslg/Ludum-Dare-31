@@ -3,25 +3,7 @@ using System.Collections;
 
 public class GameMode : MonoBehaviour
 {
-    #region Singleton Implementation
-    private static GameMode _instance = null;
-
-    public static GameMode Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new GameMode();
-            }
-            return _instance;
-        }
-        set
-        {
-            _instance = value;
-        }
-    }
-    #endregion
+    public GameObject FergusonCamera;
 
     #region GAME CONSTS
     
@@ -30,21 +12,24 @@ public class GameMode : MonoBehaviour
     public const float AudimatHigh      = 300;
 
     public const float AudimatIncreaseValue = 1.0f;
-    public const float AudimatIncreaseDelay = 0.5f;
+
+    public const float TimeBeforeChannelZapping = 6000.0f;
 
     #endregion
 
     protected void Start()
     {
-        
+        SetupGameStateTimer(TimeBeforeChannelZapping);
     }
 
     protected void Update()
     {
         if (GameState.ChannelSwitchTimer <= 0 && 
-            GameState.CurrentChannel != EChannel.None)
+            GameState.CurrentChannel != EChannel.None &&
+            !FergusonCamera.GetComponent<CameraController>().IsLocked)
         {
             GameState.ZapToNextChannel();
+            SetupGameStateTimer(TimeBeforeChannelZapping);
         }
     }
 
@@ -55,6 +40,7 @@ public class GameMode : MonoBehaviour
     public void SetupGameStateTimer(float duration)
     {
         GameState.ChannelSwitchTimer = duration;
+        GameState.TimerInitialized = true;
         StartCoroutine(Timer());
     }
 
@@ -62,11 +48,13 @@ public class GameMode : MonoBehaviour
     {
         while (GameState.ChannelSwitchTimer > 0)
         {
+            //Debug.Log(GameState.ChannelSwitchTimer);
             GameState.ChannelSwitchTimer -= Time.deltaTime;
             if (GameState.ChannelSwitchTimer < 0)
             {
                 GameState.ChannelSwitchTimer = 0;
             }
+            yield return 0;
         }
         yield return 0;
     }

@@ -3,38 +3,48 @@ using System.Collections;
 
 public class GameState : MonoBehaviour
 {
-    #region Singleton implementation
-    private static GameState _instance = null;
-
-    public static GameState Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new GameState();
-            }
-            return _instance;
-        }
-        set
-        {
-            _instance = value;
-        }
-    }
-    #endregion
-
     public static EChannel CurrentChannel { get; private set; }
+
+    public static FoxNews FoxNewsInstance { get; private set; }
+    public static AlJazeera AlJazeeraInstance { get; private set; }
+    public static AnarchyTV AnarchyTVInstance { get; private set; }
+    public static BokoHaram BokoHaramInstance { get; private set; }
+
+    private static GameObject _foxNewsParentGameObject;
+    private static GameObject _alJazeeraParentGameObject;
+    private static GameObject _anarchyTvParentGameObject;
+    private static GameObject _bokoHaramParentGameObject;
 
     /// <summary>
     /// Time before GameMode Channel Switch need to be activated
     /// </summary>
     public static float ChannelSwitchTimer;
+    public static bool TimerInitialized;
 
     protected void Start()
     {
+        _foxNewsParentGameObject = GameObject.Find("Fox News");
+        _alJazeeraParentGameObject = GameObject.Find("Al Jazeera");
+        _anarchyTvParentGameObject = GameObject.Find("Anarchy TV");
+        _bokoHaramParentGameObject = GameObject.Find("Boko Haram");
+
+        FoxNewsInstance = _foxNewsParentGameObject.transform.FindChild("Fox News Logic").GetComponent<FoxNews>();
+        AlJazeeraInstance = _alJazeeraParentGameObject.transform.FindChild("Al Jazeera Logic").GetComponent<AlJazeera>();
+        AnarchyTVInstance = _anarchyTvParentGameObject.transform.FindChild("Anarchy TV Logic").GetComponent<AnarchyTV>();
+        BokoHaramInstance = _bokoHaramParentGameObject.transform.FindChild("Boko Haram Logic").GetComponent<BokoHaram>();
+
+        _alJazeeraParentGameObject.gameObject.SetActive(false);
+        _anarchyTvParentGameObject.gameObject.SetActive(false);
+        _bokoHaramParentGameObject.gameObject.SetActive(false);
+
         CurrentChannel = EChannel.FoxNews;
+        _foxNewsParentGameObject.gameObject.SetActive(true);
     }
 
+    protected void Update()
+    {
+        
+    }
 
     /// <summary>
     /// Zap to the next channel :
@@ -45,22 +55,33 @@ public class GameState : MonoBehaviour
     /// </summary>
     public static void ZapToNextChannel()
     {
+        if (!TimerInitialized)
+        {
+            return;
+        }
         switch (CurrentChannel)
         {
             case EChannel.FoxNews:
                 CurrentChannel = EChannel.AlJazeera;
+                _foxNewsParentGameObject.SetActive(false);
+                _alJazeeraParentGameObject.SetActive(true);
                 break;
 
             case EChannel.AlJazeera:
                 CurrentChannel = EChannel.AnarchyTV;
+                _alJazeeraParentGameObject.SetActive(false);
+                _anarchyTvParentGameObject.SetActive(true);
                 break;
 
             case EChannel.AnarchyTV:
                 CurrentChannel = EChannel.BokoHaram;
+                _anarchyTvParentGameObject.SetActive(false);
+                _bokoHaramParentGameObject.SetActive(true);
                 break;
 
             case EChannel.BokoHaram:
                 CurrentChannel = EChannel.None;
+                _bokoHaramParentGameObject.SetActive(false);
                 break;
         }
     }
