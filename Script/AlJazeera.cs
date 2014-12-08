@@ -26,6 +26,8 @@ public class AlJazeera : Channel
 
     protected new void Start()
     {
+        base.Start();
+
         /* ******************************************************************************************
          *                           Speaker's comments initialization                              *
          * **************************************************************************************** */
@@ -127,6 +129,6 @@ public class AlJazeera : Channel
          *                      End of Dirty Hard coded dialogs initialization                      *
          * **************************************************************************************** */
 
-        base.Start();
+        
     }
 }

@@ -26,6 +26,8 @@ public class FoxNews : Channel
 
     protected new void Start()
     {
+        base.Start();
+
         /* ******************************************************************************************
          *                           Speaker's comments initialization                              *
          * **************************************************************************************** */
@@ -130,8 +132,6 @@ public class FoxNews : Channel
         /* ******************************************************************************************
          *                      End of Dirty Hard coded dialogs initialization                      *
          * **************************************************************************************** */
-
-        base.Start();
     }
 
     public override void AddActionToChannel(InterestZone obj)
