@@ -8,15 +8,9 @@ using System.Collections;
 [RequireComponent(typeof(BoxCollider2D))]
 public class CameraController : MonoBehaviour
 {
-
     public bool IsDebugEnabled;
 
     #region Attributes
-
-    public GameObject SubtitlesGameObject;
-    private Subtitles _subtitles;
-    public GameObject NewsTickerGameObject;
-    private NewsTicker _newsTicker;
 
     // Speed
     public float HorizontalSpeed = 3f;
@@ -95,8 +89,9 @@ public class CameraController : MonoBehaviour
             transform.position = new Vector3(transform.position.x + axisX * HorizontalSpeed * Time.deltaTime, transform.position.y + axisY * VerticalSpeed * Time.deltaTime, _currentZoom);
 
             CollideManager();
-            ManageInterestZone();
         }
+
+        ManageInterestZone();
     }
 
     #region Camera Functions
@@ -106,33 +101,17 @@ public class CameraController : MonoBehaviour
         if (!IsLocked)
         {
             RaycastHit hit;
-
             Ray ray = new Ray(transform.position, Vector3.forward);
             if (Physics.Raycast(ray, out hit, 100))
             {
                 if (hit.collider.gameObject.tag == "InterestZone" &&
-                    Math.Abs(_friendlyCurrentZoom - MaximumZoom) < 0.1) // Comparison of floats with 0.1 margin error
+                    Math.Abs(_friendlyCurrentZoom - MaximumZoom) < 0.1 && // Comparison of floats with 0.1 margin error
+                    !hit.collider.GetComponent<InterestZone>().HasBeenSeen)
                 {
                     FocusedZone = hit.collider.gameObject.GetComponent<InterestZone>();
                     Lock();
                     FocusedZone.Focus();
                     DisplaySubtitlesAndTweet();
-                }
-            }
-        }
-        else
-        {
-            RaycastHit hit;
-
-            Ray ray = new Ray(transform.position, Vector3.forward);
-            if (Physics.Raycast(ray, out hit, 100))
-            {
-                if (hit.collider.gameObject.tag == "InterestZone")
-                {
-                    if (!hit.collider.gameObject.GetComponent<InterestZone>().HasBeenSeen)
-                    {
-                        IsLocked = false; // Reset camera Lock
-                    }
                 }
             }
         }
@@ -148,7 +127,7 @@ public class CameraController : MonoBehaviour
         rng = UnityEngine.Random.Range(0, winningTags.Count);
         string tweet = ComputeWinningTweetForTag(winningTags[rng]);
 
-        GameState.GetCurrentChannelInstance().Subtitles.GetComponent<Subtitles>().DisplaySubtitle(comment, GameMode.SubtitlesDuration);
+        GameState.GetCurrentChannelInstance().Subtitles.GetComponent<Subtitles>().DisplaySubtitle(comment, GameMode.ActionFreezeDuration);
         GameState.GetCurrentChannelInstance().NewsTicker.GetComponent<NewsTicker>().DisplaySpecificNews(tweet);
     }
 
@@ -305,15 +284,30 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Lock the camera on an action for _lockTime seconds
-    /// </summary>
+    public void ResetZoom()
+    {
+        _currentZoom = -13.9f;
+        _friendlyCurrentZoom = 0f;
+        gameObject.transform.localPosition = new Vector3(0, 0, -13.9f);
+    }
+
     private void Lock()
     {
-        if (!IsLocked)
+        IsLocked = true;
+        StartCoroutine(Lock_Coroutine(GameMode.ActionFreezeDuration));
+    }
+
+    private IEnumerator Lock_Coroutine(float duration)
+    {
+        float timer = duration;
+        while (timer > 0)
         {
-            IsLocked = true;
+            timer -= Time.deltaTime;
+            yield return 0;
         }
+        IsLocked = false;
+        ResetZoom();
+        yield return 0;
     }
     #endregion
 }
