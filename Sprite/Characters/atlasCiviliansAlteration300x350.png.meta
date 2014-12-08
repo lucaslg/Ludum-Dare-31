@@ -242,7 +242,7 @@ TextureImporter:
         width: 50
         height: 50
       alignment: 9
-      pivot: {x: .5, y: .239999995}
+      pivot: {x: .5, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: atlasCiviliansAlteration300x350_16
       rect:
@@ -252,7 +252,7 @@ TextureImporter:
         width: 50
         height: 50
       alignment: 9
-      pivot: {x: .5, y: .239999995}
+      pivot: {x: .5, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: atlasCiviliansAlteration300x350_17
       rect:
@@ -262,7 +262,7 @@ TextureImporter:
         width: 50
         height: 50
       alignment: 9
-      pivot: {x: 1, y: .239999995}
+      pivot: {x: .5, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: atlasCiviliansAlteration300x350_18
       rect:
@@ -272,7 +272,7 @@ TextureImporter:
         width: 50
         height: 50
       alignment: 9
-      pivot: {x: .5, y: .239999995}
+      pivot: {x: .5, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: atlasCiviliansAlteration300x350_19
       rect:
@@ -362,7 +362,7 @@ TextureImporter:
         width: 50
         height: 50
       alignment: 9
-      pivot: {x: .5, y: .239999995}
+      pivot: {x: .5, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: atlasCiviliansAlteration300x350_28
       rect:
@@ -372,7 +372,7 @@ TextureImporter:
         width: 50
         height: 50
       alignment: 9
-      pivot: {x: .5, y: .239999995}
+      pivot: {x: .5, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: atlasCiviliansAlteration300x350_29
       rect:
@@ -382,7 +382,7 @@ TextureImporter:
         width: 50
         height: 50
       alignment: 9
-      pivot: {x: .5, y: .239999995}
+      pivot: {x: .5, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: atlasCiviliansAlteration300x350_30
       rect:
