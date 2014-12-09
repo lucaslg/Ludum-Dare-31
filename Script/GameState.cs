@@ -30,8 +30,9 @@ public class GameState : MonoBehaviour
 
 
 
-	private bool policeIsPlayed = false;
-	private bool robberyIsPlayed = false;
+	private static bool policeIsPlayed = false;
+	private static bool robberyIsPlayed = false;
+	private static bool resetAnim = false;
 
     /// <summary>
     /// Time before GameMode Channel Switch need to be activated
@@ -71,10 +72,13 @@ public class GameState : MonoBehaviour
 
 		policeIsPlayed = false;
 		robberyIsPlayed = false;
+
+		//police = GameObject.Find ("PoliceForce");
+		//robbery = GameObject.Find ("Roberry");
     }
 
     protected void Update()
-    {
+	{
 		Debug.Log (ChannelSwitchTimer);
 
 		if (ChannelSwitchTimer < 45 && ChannelSwitchTimer > 44 && (!policeIsPlayed))
@@ -91,6 +95,23 @@ public class GameState : MonoBehaviour
 			robberyIsPlayed = true;
 			robbery.GetComponent<BoxCollider>().enabled = true;
 			robbery.GetComponent<Animator>().SetBool("active",true);
+		}
+
+		// End of the scene
+		if (ChannelSwitchTimer < 0.5 && !resetAnim)
+		{
+			resetAnim = true;
+
+			policeIsPlayed = false;
+			police.GetComponent<BoxCollider>().enabled = false;
+			police.GetComponent<Animator>().SetBool("active",false);
+			
+			robberyIsPlayed = false;
+			robbery.GetComponent<BoxCollider>().enabled = false;
+			robbery.GetComponent<Animator>().SetBool("active",false);
+			
+			robbery.HasBeenSeen = false;
+			police.HasBeenSeen = false;
 		}
     }
 
@@ -128,6 +149,10 @@ public class GameState : MonoBehaviour
     /// </summary>
     public static void ZapToNextChannel()
     {
+		// Réinitialisation de la scene
+
+		resetAnim = true;
+
         if (!TimerInitialized)
         {
             return;
@@ -171,7 +196,7 @@ public class GameState : MonoBehaviour
     /// Reset every InterestZone.HasBeenSeen to false
     /// </summary>
     public static void ResetInterestZones()
-    {
+    {		
         foreach (InterestZone interestZone in GameState.InterestZoneList)
         {
             interestZone.HasBeenSeen = false;
