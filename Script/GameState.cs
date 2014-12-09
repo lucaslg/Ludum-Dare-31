@@ -55,10 +55,10 @@ public class GameState : MonoBehaviour
 
         FergusonCameraInstance = GameObject.Find("Ferguson/Camera");
 
-        //_endScreenParentGameObject = GameObject.Find("EndScreen");
-        //EndScreenInstance = GameObject.Find("EndScreen/EndScreen Logic").GetComponent<EndScreen>();
+        _endScreenParentGameObject = GameObject.Find("EndScreen");
+        EndScreenInstance = GameObject.Find("EndScreen/EndScreen Logic").GetComponent<EndScreen>();
 
-        //_endScreenParentGameObject.gameObject.SetActive(false);
+        _endScreenParentGameObject.gameObject.SetActive(false);
         _foxNewsParentGameObject.gameObject.SetActive(false);
         _alJazeeraParentGameObject.gameObject.SetActive(false);
         _anarchyTvParentGameObject.gameObject.SetActive(false);
