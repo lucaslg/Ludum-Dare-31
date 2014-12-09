@@ -16,10 +16,18 @@ public class GameState : MonoBehaviour
     private static GameObject _anarchyTvParentGameObject;
     private static GameObject _bokoHaramParentGameObject;
 
+	public InterestZone police;
+	public InterestZone robbery;
+
     public static GameObject FergusonCameraInstance { get; private set; }
 
     [HideInInspector]
     public static List<InterestZone> InterestZoneList = new List<InterestZone>();
+
+
+
+	private bool policeIsPlayed = false;
+	private bool robberyIsPlayed = false;
 
     /// <summary>
     /// Time before GameMode Channel Switch need to be activated
@@ -49,11 +57,30 @@ public class GameState : MonoBehaviour
 
         CurrentChannel = EChannel.FoxNews;
         _foxNewsParentGameObject.gameObject.SetActive(true);
+
+		policeIsPlayed = false;
+		robberyIsPlayed = false;
     }
 
     protected void Update()
     {
-        
+		Debug.Log (ChannelSwitchTimer);
+
+		if (ChannelSwitchTimer < 45 && ChannelSwitchTimer > 44 && (!policeIsPlayed))
+		{
+			Debug.Log ("Déclenchement police");
+			policeIsPlayed = true;
+			police.GetComponent<BoxCollider>().enabled = true;
+			police.GetComponent<Animator>().SetBool("active",true);
+		}
+
+		if (ChannelSwitchTimer < 30 && ChannelSwitchTimer > 29 && (!robberyIsPlayed))
+		{
+			Debug.Log ("Déclenchement roberry");
+			robberyIsPlayed = true;
+			robbery.GetComponent<BoxCollider>().enabled = true;
+			robbery.GetComponent<Animator>().SetBool("active",true);
+		}
     }
 
     /// <summary>
