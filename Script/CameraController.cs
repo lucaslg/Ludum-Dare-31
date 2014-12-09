@@ -112,9 +112,28 @@ public class CameraController : MonoBehaviour
                     Lock();
                     FocusedZone.Focus();
                     DisplaySubtitlesAndTweet();
+                    ComputeAudience();
                 }
             }
         }
+    }
+
+    private void ComputeAudience()
+    {
+        int score = 0;
+        foreach (EActionTag tag in FocusedZone.GetTags())
+        {
+            if (GameState.GetCurrentChannelInstance().PositiveTags.Contains(tag))
+            {
+                score++;
+            }
+            else if (GameState.GetCurrentChannelInstance().NegativeTags.Contains(tag))
+            {
+                score--;
+            }
+        }
+
+        GameState.GetCurrentChannelInstance().CurrentAudimat += score;
     }
 
     private void DisplaySubtitlesAndTweet()

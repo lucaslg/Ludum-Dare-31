@@ -111,9 +111,6 @@ public class GameState : MonoBehaviour
 			robberyIsPlayed = false;
 			robbery.GetComponent<BoxCollider>().enabled = false;
 			robbery.GetComponent<Animator>().SetBool("active",false);
-			
-			robbery.HasBeenSeen = false;
-			police.HasBeenSeen = false;
 		}
     }
 
@@ -152,7 +149,7 @@ public class GameState : MonoBehaviour
     public static void ZapToNextChannel()
     {
 		// Réinitialisation de la scene
-		resetAnim = true;
+		resetAnim = false;
 
         if (!TimerInitialized)
         {
