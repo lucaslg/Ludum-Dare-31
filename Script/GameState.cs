@@ -17,6 +17,9 @@ public class GameState : MonoBehaviour
     private static GameObject _bokoHaramParentGameObject;
     private static GameObject _fergusonParentGameObject;
 
+	public InterestZone police;
+	public InterestZone robbery;
+
     public static GameObject FergusonCameraInstance { get; private set; }
 
     private static GameObject _endScreenParentGameObject;
@@ -24,6 +27,12 @@ public class GameState : MonoBehaviour
 
     [HideInInspector]
     public static List<InterestZone> InterestZoneList = new List<InterestZone>();
+
+
+
+	private static bool policeIsPlayed = false;
+	private static bool robberyIsPlayed = false;
+	private static bool resetAnim = false;
 
     /// <summary>
     /// Time before GameMode Channel Switch need to be activated
@@ -47,10 +56,10 @@ public class GameState : MonoBehaviour
 
         FergusonCameraInstance = GameObject.Find("Ferguson/Camera");
 
-        //_endScreenParentGameObject = GameObject.Find("EndScreen");
-        //EndScreenInstance = GameObject.Find("EndScreen/EndScreen Logic").GetComponent<EndScreen>();
+        _endScreenParentGameObject = GameObject.Find("EndScreen");
+        EndScreenInstance = GameObject.Find("EndScreen/EndScreen Logic").GetComponent<EndScreen>();
 
-        //_endScreenParentGameObject.gameObject.SetActive(false);
+        _endScreenParentGameObject.gameObject.SetActive(false);
         _foxNewsParentGameObject.gameObject.SetActive(false);
         _alJazeeraParentGameObject.gameObject.SetActive(false);
         _anarchyTvParentGameObject.gameObject.SetActive(false);
@@ -60,11 +69,50 @@ public class GameState : MonoBehaviour
 
         CurrentChannel = EChannel.FoxNews;
         _foxNewsParentGameObject.gameObject.SetActive(true);
+
+		policeIsPlayed = false;
+		robberyIsPlayed = false;
+
+		//police = GameObject.Find ("PoliceForce");
+		//robbery = GameObject.Find ("Roberry");
     }
 
     protected void Update()
-    {
-        
+	{
+		Debug.Log (ChannelSwitchTimer);
+
+		if (ChannelSwitchTimer < 45 && ChannelSwitchTimer > 44 && (!policeIsPlayed))
+		{
+			Debug.Log ("Déclenchement police");
+			policeIsPlayed = true;
+			police.GetComponent<BoxCollider>().enabled = true;
+			police.GetComponent<Animator>().SetBool("active",true);
+		}
+
+		if (ChannelSwitchTimer < 30 && ChannelSwitchTimer > 29 && (!robberyIsPlayed))
+		{
+			Debug.Log ("Déclenchement roberry");
+			robberyIsPlayed = true;
+			robbery.GetComponent<BoxCollider>().enabled = true;
+			robbery.GetComponent<Animator>().SetBool("active",true);
+		}
+
+		// End of the scene
+		if (ChannelSwitchTimer < 0.5 && !resetAnim)
+		{
+			resetAnim = true;
+
+			policeIsPlayed = false;
+			police.GetComponent<BoxCollider>().enabled = false;
+			police.GetComponent<Animator>().SetBool("active",false);
+			
+			robberyIsPlayed = false;
+			robbery.GetComponent<BoxCollider>().enabled = false;
+			robbery.GetComponent<Animator>().SetBool("active",false);
+			
+			robbery.HasBeenSeen = false;
+			police.HasBeenSeen = false;
+		}
     }
 
     /// <summary>
@@ -101,6 +149,10 @@ public class GameState : MonoBehaviour
     /// </summary>
     public static void ZapToNextChannel()
     {
+		// Réinitialisation de la scene
+
+		resetAnim = true;
+
         if (!TimerInitialized)
         {
             return;
@@ -144,7 +196,7 @@ public class GameState : MonoBehaviour
     /// Reset every InterestZone.HasBeenSeen to false
     /// </summary>
     public static void ResetInterestZones()
-    {
+    {		
         foreach (InterestZone interestZone in GameState.InterestZoneList)
         {
             interestZone.HasBeenSeen = false;

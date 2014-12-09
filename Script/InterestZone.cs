@@ -18,6 +18,8 @@ public class InterestZone : MonoBehaviour
 {
     #region Attributes
 
+	public bool IsAnimated = false;
+
     public bool IsDebugEnabled = false;
 
     public bool HasBeenSeen { get; set; }
@@ -53,6 +55,14 @@ public class InterestZone : MonoBehaviour
         HasBeenSeen = true;
         animation.Play();
     }
+
+	public void ActiveZone()
+	{
+		if (IsAnimated)
+		{
+
+		}
+	}
 
     /// <summary>
     /// Returns the tags of the InterestZone
