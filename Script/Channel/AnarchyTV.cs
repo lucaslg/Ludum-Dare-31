@@ -126,6 +126,10 @@ public class AnarchyTV : Channel
 
         #endregion
 
+        WinningSentence = "After the insurrection, chaos spread all over the world like wildfire. Freedom will soon blossom from the ashes of Ferguson.";
+
+        LosingSentence = "A report from swedish journalists revealed Anarchy Web TV was directed by Warner Bros to promote and sell Guy de Fawkes masks.";
+
         /* ******************************************************************************************
          *                      End of Dirty Hard coded dialogs initialization                      *
          * **************************************************************************************** */

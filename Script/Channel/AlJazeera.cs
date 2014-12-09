@@ -124,6 +124,11 @@ public class AlJazeera : Channel
         
         #endregion
 
+        WinningSentence = "Following the slow destruction of Fergusion in the name of freedom, qatari princes acquired all of the real estate market in the city. " +
+                          "Streets are now paved with gold and the Football Club of Ferguson has become the top one MLS franchise in America.";
+
+        LosingSentence = "The United States of America declared Qatar had acquired nuclear armament and therefore invaded the country. In other news, the oil price in America dropped to 5 dollars per barrel.";
+
         /* ******************************************************************************************
          *                      End of Dirty Hard coded dialogs initialization                      *
          * **************************************************************************************** */

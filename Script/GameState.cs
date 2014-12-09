@@ -15,8 +15,12 @@ public class GameState : MonoBehaviour
     private static GameObject _alJazeeraParentGameObject;
     private static GameObject _anarchyTvParentGameObject;
     private static GameObject _bokoHaramParentGameObject;
+    private static GameObject _fergusonParentGameObject;
 
     public static GameObject FergusonCameraInstance { get; private set; }
+
+    private static GameObject _endScreenParentGameObject;
+    public static EndScreen EndScreenInstance { get; private set; }
 
     [HideInInspector]
     public static List<InterestZone> InterestZoneList = new List<InterestZone>();
@@ -34,6 +38,7 @@ public class GameState : MonoBehaviour
         _alJazeeraParentGameObject = GameObject.Find("Al Jazeera");
         _anarchyTvParentGameObject = GameObject.Find("Anarchy TV");
         _bokoHaramParentGameObject = GameObject.Find("Boko Haram");
+        _fergusonParentGameObject = GameObject.Find("Ferguson");
 
         FoxNewsInstance = _foxNewsParentGameObject.transform.FindChild("Fox News Logic").GetComponent<FoxNews>();
         AlJazeeraInstance = _alJazeeraParentGameObject.transform.FindChild("Al Jazeera Logic").GetComponent<AlJazeera>();
@@ -42,10 +47,16 @@ public class GameState : MonoBehaviour
 
         FergusonCameraInstance = GameObject.Find("Ferguson/Camera");
 
+        _endScreenParentGameObject = GameObject.Find("EndScreen");
+        EndScreenInstance = GameObject.Find("EndScreen/EndScreen Logic").GetComponent<EndScreen>();
+
+        _endScreenParentGameObject.gameObject.SetActive(false);
         _foxNewsParentGameObject.gameObject.SetActive(false);
         _alJazeeraParentGameObject.gameObject.SetActive(false);
         _anarchyTvParentGameObject.gameObject.SetActive(false);
         _bokoHaramParentGameObject.gameObject.SetActive(false);
+
+        _fergusonParentGameObject.SetActive(true);
 
         CurrentChannel = EChannel.FoxNews;
         _foxNewsParentGameObject.gameObject.SetActive(true);
@@ -117,11 +128,17 @@ public class GameState : MonoBehaviour
             case EChannel.BokoHaram:
                 CurrentChannel = EChannel.None;
                 _bokoHaramParentGameObject.SetActive(false);
+
+                _fergusonParentGameObject.SetActive(false);
+                _endScreenParentGameObject.SetActive(true);
+                EndScreenInstance.Win();
                 break;
         }
         ResetInterestZones();
         FergusonCameraInstance.GetComponent<CameraController>().ResetZoom();
     }
+
+
 
     /// <summary>
     /// Reset every InterestZone.HasBeenSeen to false

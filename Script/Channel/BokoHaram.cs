@@ -121,6 +121,11 @@ public class BokoHaram : Channel
 
         #endregion
 
+        WinningSentence = "An impressive number of new fighters joined the Jihad to spread the word of God to the infidels of Ferguson. " +
+            "The Islamic State sent hundreds of kidnapped high school girls to convert young boys and old perverts. Ferguson is now part of the caliphate.";
+
+        LosingSentence = "The Jihad movement losed traction in a couple of years. Most of its members migrated to Western Europe, where they stole natives\' jobs.";
+
         /* ******************************************************************************************
          *                      End of Dirty Hard coded dialogs initialization                      *
          * **************************************************************************************** */

@@ -19,10 +19,15 @@ public class Shadow2D : MonoBehaviour
 	    {
             // get the object on which you need to apply your shadow
             m_shadowSprite = (GameObject)Instantiate(gameObject);
+	        m_shadowSprite.name = "Shadow";
             Destroy(m_shadowSprite.GetComponent<Shadow2D>());
             m_shadowSprite.transform.parent = transform;
             m_shadowSprite.transform.localPosition = Vector3.zero;
             m_shadowSprite.transform.localScale = new Vector3(1f, 2f, 1f);
+
+            //Destroy(m_shadowSprite.GetComponent<SpriteRenderer>());
+
+	        //m_shadowSprite.GetComponent<SpriteRenderer>().sortingOrder = 0;
             m_shadowSprite.renderer.material = (Material)Instantiate(m_shadowMaterialPrefab);
 
             // Shader settings
