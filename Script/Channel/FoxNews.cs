@@ -128,16 +128,22 @@ public class FoxNews : Channel
 
         #endregion
 
+        WinningSentence =
+            "Following the odious events of Ferguson, the natives of the glorious nation of America realized their homeland was in jeopardy." +
+            "The tenth crusade was launched by fellow patriots, with Rick Santorum as their leader and guide.";
+
+        LosingSentence = "Due to the decline of Fox News, Hilary Clinton was elected with 95% of the popular vote in 2016.";
+
         /* ******************************************************************************************
          *                      End of Dirty Hard coded dialogs initialization                      *
          * **************************************************************************************** */
     }
 
-    public override void AddActionToChannel(InterestZone obj)
-    {
-        if (obj.ChannelTarget == EChannel.All || obj.ChannelTarget == EChannel.FoxNews)
-        {
-            base.AddActionToChannel(obj);
-        }
-    }
+    //public override void AddActionToChannel(InterestZone obj)
+    //{
+    //    if (obj.ChannelTarget == EChannel.All || obj.ChannelTarget == EChannel.FoxNews)
+    //    {
+    //        base.AddActionToChannel(obj);
+    //    }
+    //}
 }

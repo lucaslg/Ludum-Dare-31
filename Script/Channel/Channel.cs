@@ -22,11 +22,17 @@ public enum EAudimatState
 
 public class Channel : MonoBehaviour
 {
-    public float CurrentAudimat = 0;
-    public float AudimatAtStart = 50;
+    public int CurrentAudimat = 0;
+    public int AudimatAtStart;
     public GameObject NewsTicker;
     public GameObject AudimatBar;
     public GameObject Subtitles;
+
+    [HideInInspector]
+    public string WinningSentence;
+
+    [HideInInspector]
+    public string LosingSentence;
 
     [HideInInspector]
     public List<EActionTag> PositiveTags;

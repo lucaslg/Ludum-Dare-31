@@ -9,7 +9,7 @@ public class GameMode : MonoBehaviour
 
     public const float AudimatIncreaseValue = 1.0f;
 
-    public const float TimeBeforeChannelZapping = 60.0f;
+    public const float TimeBeforeChannelZapping = 5.0f;
 
     public const float ActionFreezeDuration = 10.0f;
 
