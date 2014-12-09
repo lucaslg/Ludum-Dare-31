@@ -13,7 +13,6 @@ public enum EActionTag
     Misery = 5
 }
 
-[RequireComponent(typeof(Animator))]
 public class InterestZone : MonoBehaviour
 {
     #region Attributes
@@ -53,7 +52,6 @@ public class InterestZone : MonoBehaviour
             Debug.Log(gameObject.name + " just get focused by the camera.");
         }
         HasBeenSeen = true;
-        animation.Play();
     }
 
 	public void ActiveZone()

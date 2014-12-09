@@ -17,7 +17,7 @@ public class NewsTicker : MonoBehaviour
     private bool _isSpecificNewsDisplayed = false;
 
     public string Separator;
-    public static float ScrollingSpeed = 0.2f;
+    public static float ScrollingSpeed = 1f;
     public string[] DefaultNews;
 
     // Awake (First on instantiation flow)
@@ -64,7 +64,7 @@ public class NewsTicker : MonoBehaviour
 
             if (_textComponent.rectTransform.localPosition.x > -_startingPosition.x)
             {
-                _textComponent.rectTransform.localPosition = new Vector3(_textComponent.rectTransform.localPosition.x - ScrollingSpeed / 10.0f / Time.deltaTime, 0);
+                _textComponent.rectTransform.Translate(-Time.deltaTime * ScrollingSpeed, 0, 0);
             }
             else
             {
@@ -112,7 +112,7 @@ public class NewsTicker : MonoBehaviour
         {
             if (_textComponent.rectTransform.localPosition.x > -_startingPosition.x)
             {
-                _textComponent.rectTransform.Translate(Time.deltaTime * ScrollingSpeed, 0, 0);
+                _textComponent.rectTransform.Translate(-Time.deltaTime * ScrollingSpeed, 0, 0);
             }
             else
             {

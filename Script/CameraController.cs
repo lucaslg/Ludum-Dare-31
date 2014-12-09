@@ -31,8 +31,8 @@ public class CameraController : MonoBehaviour
     public static InterestZone FocusedZone;
 
     // Keymap
-    public KeyCode ZoomKey = KeyCode.PageUp;
-    public KeyCode UnzoomKey = KeyCode.PageDown;
+    public KeyCode ZoomKey = KeyCode.Alpha1;
+    public KeyCode UnzoomKey = KeyCode.Alpha2;
 
     private Vector2 _direction;
 

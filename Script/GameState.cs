@@ -16,6 +16,7 @@ public class GameState : MonoBehaviour
     private static GameObject _anarchyTvParentGameObject;
     private static GameObject _bokoHaramParentGameObject;
     private static GameObject _fergusonParentGameObject;
+    private static GameObject _audimatBarParentGameObject;
 
 	public InterestZone police;
 	public InterestZone robbery;
@@ -29,7 +30,7 @@ public class GameState : MonoBehaviour
     public static List<InterestZone> InterestZoneList = new List<InterestZone>();
 
 
-
+    public static bool Zap = false;
 	private static bool policeIsPlayed = false;
 	private static bool robberyIsPlayed = false;
 	private static bool resetAnim = false;
@@ -48,6 +49,7 @@ public class GameState : MonoBehaviour
         _anarchyTvParentGameObject = GameObject.Find("Anarchy TV");
         _bokoHaramParentGameObject = GameObject.Find("Boko Haram");
         _fergusonParentGameObject = GameObject.Find("Ferguson");
+        _audimatBarParentGameObject = GameObject.Find("Audimat Bar Canvas");
 
         FoxNewsInstance = _foxNewsParentGameObject.transform.FindChild("Fox News Logic").GetComponent<FoxNews>();
         AlJazeeraInstance = _alJazeeraParentGameObject.transform.FindChild("Al Jazeera Logic").GetComponent<AlJazeera>();
@@ -79,7 +81,7 @@ public class GameState : MonoBehaviour
 
     protected void Update()
 	{
-		Debug.Log (ChannelSwitchTimer);
+		//Debug.Log (ChannelSwitchTimer);
 
 		if (ChannelSwitchTimer < 45 && ChannelSwitchTimer > 44 && (!policeIsPlayed))
 		{
@@ -150,7 +152,6 @@ public class GameState : MonoBehaviour
     public static void ZapToNextChannel()
     {
 		// Réinitialisation de la scene
-
 		resetAnim = true;
 
         if (!TimerInitialized)
@@ -181,6 +182,7 @@ public class GameState : MonoBehaviour
                 CurrentChannel = EChannel.None;
                 _bokoHaramParentGameObject.SetActive(false);
 
+                _audimatBarParentGameObject.SetActive(false);
                 _fergusonParentGameObject.SetActive(false);
                 _endScreenParentGameObject.SetActive(true);
                 EndScreenInstance.Win();

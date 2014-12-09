@@ -9,7 +9,7 @@ public class GameMode : MonoBehaviour
 
     public const float AudimatIncreaseValue = 1.0f;
 
-    public const float TimeBeforeChannelZapping = 5.0f;
+    public const float TimeBeforeChannelZapping = 50.0f;
 
     public const float ActionFreezeDuration = 10.0f;
 
@@ -22,10 +22,12 @@ public class GameMode : MonoBehaviour
     
     protected void Update()
     {
-        if (GameState.ChannelSwitchTimer <= 0 && 
+        if (GameState.Zap &&
+            GameState.ChannelSwitchTimer <= 0 && 
             GameState.CurrentChannel != EChannel.None &&
             !FergusonCamera.GetComponent<CameraController>().IsLocked)
         {
+            GameState.Zap = false;
             GameState.ZapToNextChannel();
             SetupGameStateTimer(TimeBeforeChannelZapping);
         }
@@ -46,14 +48,12 @@ public class GameMode : MonoBehaviour
     {
         while (GameState.ChannelSwitchTimer > 0)
         {
-            //Debug.Log(GameState.ChannelSwitchTimer);
             GameState.ChannelSwitchTimer -= Time.deltaTime;
-            if (GameState.ChannelSwitchTimer < 0)
-            {
-                GameState.ChannelSwitchTimer = 0;
-            }
             yield return 0;
         }
+        
+        GameState.Zap = true;
+        GameState.ChannelSwitchTimer = 0;
         yield return 0;
     }
 }

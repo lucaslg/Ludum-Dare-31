@@ -135,6 +135,10 @@ public class MenuLogic : MonoBehaviour
         ScrambleParentGameObject.SetActive(true);
         FoxNewsParentGameObject.SetActive(false);
         AlJazeeraParentGameObject.SetActive(false);
+        BokoHaramParentObject.SetActive(false);
+        AnarchyTVParentObject.SetActive(false);
+
+        Application.LoadLevel(1);
     }
 
     public void DisplayCredits()

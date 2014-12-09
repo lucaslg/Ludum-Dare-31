@@ -6,7 +6,7 @@ public class AudimatBar : MonoBehaviour
 
     void Update ()
     {
-        gameObject.transform.localPosition = - new Vector3(0, 321f - GameState.GetCurrentChannelInstance().CurrentAudimat * 16.05f);
+        gameObject.transform.localPosition = - new Vector3(0, 249.3f - GameState.GetCurrentChannelInstance().CurrentAudimat * 12.465f);
 	}
 
 }
